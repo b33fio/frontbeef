@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/b33fio/frontbeef.svg?branch=master)](https://travis-ci.org/b33fio/frontbeef)
+
 # Frontbeef
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.4.
