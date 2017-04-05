@@ -1,5 +1,5 @@
 [![Build Status](http://ci.b33f.io/job/test1/badge/icon)](http://ci.b33f.io/job/test1/)
-DELETEME
+
 # Frontbeef
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.4.
