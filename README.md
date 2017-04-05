@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/b33fio/frontbeef.svg?branch=master)](https://travis-ci.org/b33fio/frontbeef)
+[![Build Status](http://ci.b33f.io/job/test1/badge/icon)](http://ci.b33f.io/job/test1/)
 
 # Frontbeef
 
