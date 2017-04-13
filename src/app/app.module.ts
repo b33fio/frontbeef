@@ -4,8 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BeefBrowserModule } from './beef-browser/beef-browser.module'
 import { BeefLandingModule } from './beef-landing/beef-landing.module'
+import { BeefDebateModule } from './beef-debate/beef-debate.module'
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule,
     BeefBrowserModule,
-    BeefLandingModule
+    BeefLandingModule,
+    BeefDebateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
