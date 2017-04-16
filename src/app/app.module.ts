@@ -15,15 +15,17 @@ import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-
 import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
 import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
 
+import { BeefApiService } from './beef-api/beef-api.service';
+
 const appRoutes: Routes = [
   //landing page, handles login/sign up
   {
-    path: '', 
+    path: '',
     component: HomePageComponent
   },
 
   //browse top debates
-  { path: 'browse', 
+  { path: 'browse',
     component: GlobalBrowserComponent
   },
 
@@ -48,7 +50,7 @@ const appRoutes: Routes = [
   },
 
   //any other route gets redirected to a PageNotFound component
-  { path: '**', 
+  { path: '**',
    component: BeefNotFoundComponent
   }
 ];
@@ -67,7 +69,7 @@ const appRoutes: Routes = [
     BeefDebateModule,
     BeefUtilitiesModule
   ],
-  providers: [],
+  providers: [BeefApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
