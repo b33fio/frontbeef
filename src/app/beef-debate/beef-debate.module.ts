@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DebatePageComponent } from './debate-page/debate-page.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: []
+  declarations: [DebatePageComponent]
 })
 export class BeefDebateModule { }
