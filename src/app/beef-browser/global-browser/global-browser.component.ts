@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { BeefApiService } from '../../beef-api/beef-api.service';
 
 @Component({
   selector: 'global-browser',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./global-browser.component.css']
 })
 export class GlobalBrowserComponent implements OnInit {
+    channels : any[];
 
-  constructor() { }
+    constructor(private beefApi : BeefApiService) {
+        this.channels = beefApi.getChannels();
+    }
 
-  ngOnInit() {
-  }
-
+    ngOnInit() {
+    }
 }
