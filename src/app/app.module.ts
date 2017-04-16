@@ -6,6 +6,7 @@ import { BeefBrowserModule } from './beef-browser/beef-browser.module'
 import { BeefLandingModule } from './beef-landing/beef-landing.module'
 import { BeefDebateModule } from './beef-debate/beef-debate.module'
 import { BeefUtilitiesModule } from './beef-utilities/beef-utilities.module'
+import { BeefAccountModule } from './beef-account/beef-account.module'
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,11 @@ import { GlobalBrowserComponent } from './beef-browser/global-browser/global-bro
 import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-browser.component';
 import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
 import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
+import { LoginComponent } from './beef-account/login/login.component';
+import { LogoutComponent } from './beef-account/logout/logout.component';
+import { SignupComponent } from './beef-account/signup/signup.component';
+import { SettingsComponent } from './beef-account/settings/settings.component';
+import { DebatePageComponent } from './beef-debate/debate-page/debate-page.component';
 
 import { BeefApiService } from './beef-api/beef-api.service';
 
@@ -23,32 +29,38 @@ const appRoutes: Routes = [
     path: '',
     component: HomePageComponent
   },
-
   //browse top debates
   { path: 'browse',
     component: GlobalBrowserComponent
   },
-
   //browse debates within a given (pre-defined channels)
   { path: 'browse/:channel',
     component: ChannelBrowserComponent
   },
-
   //browse debates within a given (pre-defined channels)
   { path: 'mydebates',
     component: MyDebatesComponent
   },
-
   //look at a debate (open/in-progres/closed as spectator/participant/public)
   { path: 'debate/:id',
-    component: AppComponent
+    component: DebatePageComponent
   },
-
   //view account settings and edit
-  { path: 'account',
-    component: AppComponent
+  { path: 'settings',
+    component: SettingsComponent
   },
-
+  //view account settings and edit
+  { path: 'signup',
+    component: SignupComponent
+  },
+  //view account settings and edit
+  { path: 'login',
+    component: LoginComponent
+  },
+  //view account settings and edit
+  { path: 'logout',
+    component: LogoutComponent
+  },
   //any other route gets redirected to a PageNotFound component
   { path: '**',
    component: BeefNotFoundComponent
@@ -64,9 +76,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    BeefAccountModule,
     BeefBrowserModule,
-    BeefLandingModule,
     BeefDebateModule,
+    BeefLandingModule,
     BeefUtilitiesModule
   ],
   providers: [BeefApiService],
