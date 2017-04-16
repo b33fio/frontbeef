@@ -14,6 +14,7 @@ import { GlobalBrowserComponent } from './beef-browser/global-browser/global-bro
 import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-browser.component';
 import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
 import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
+import { DebateComponent } from './beef-debate/debate/debate.component'
 
 import { BeefApiService } from './beef-api/beef-api.service';
 
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
 
   //look at a debate (open/in-progres/closed as spectator/participant/public)
   { path: 'debate/:id',
-    component: AppComponent
+    component: DebateComponent
   },
 
   //view account settings and edit
