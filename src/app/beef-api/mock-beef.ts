@@ -40,6 +40,7 @@ export const POINTS = [
 export const USERS = [
 	{
 		"username": "user1",
+        "pass": "password",
 		"name": "Mark Fontenot",
 		"email": "mfontenot@smu.edu",
 		"birthday": "01/01/1970",

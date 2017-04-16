@@ -75,4 +75,27 @@ export class BeefApiService {
             "down_votes": 0
         });
     }
+
+    /* for now just return true if valid user */
+    public login(email : string, password : string) {
+        for (let user of this._users) {
+            if ((user['email'] == email) && (user['pass'] == password))
+                return true;
+        }
+        return false;
+    }
+
+
+    public register(email : string, password : string,
+                    name : string, birthday : Date, username : string,
+                    phone : string) {
+        this._users.push({
+            "username": username,
+            "pass": password,
+            "name": name,
+            "email" : email,
+            "birthday": birthday,
+            "phone" : phone
+        });
+    }
 }
