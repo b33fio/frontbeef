@@ -5,10 +5,15 @@ import { HttpModule } from '@angular/http';
 import { BeefBrowserModule } from './beef-browser/beef-browser.module'
 import { BeefLandingModule } from './beef-landing/beef-landing.module'
 import { BeefDebateModule } from './beef-debate/beef-debate.module'
+import { BeefUtilitiesModule } from './beef-utilities/beef-utilities.module'
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './beef-landing/home-page/home-page.component'
+import { HomePageComponent } from './beef-landing/home-page/home-page.component';
+import { GlobalBrowserComponent } from './beef-browser/global-browser/global-browser.component';
+import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-browser.component';
+import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
+import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
 
 const appRoutes: Routes = [
   //landing page, handles login/sign up
@@ -19,27 +24,32 @@ const appRoutes: Routes = [
 
   //browse top debates
   { path: 'browse', 
-    component: HomePageComponent
+    component: GlobalBrowserComponent
   },
 
   //browse debates within a given (pre-defined channels)
-  // { path: 'browse/:channel',
-  //   component: AppComponent
-  // },
+  { path: 'browse/:channel',
+    component: ChannelBrowserComponent
+  },
+
+  //browse debates within a given (pre-defined channels)
+  { path: 'mydebates',
+    component: MyDebatesComponent
+  },
 
   //look at a debate (open/in-progres/closed as spectator/participant/public)
-  // { path: 'debate/:id',
-  //   component: AppComponent
-  // },
+  { path: 'debate/:id',
+    component: AppComponent
+  },
 
   //view account settings and edit
-  // { path: 'account',
-  //   component: AppComponent
-  // },
+  { path: 'account',
+    component: AppComponent
+  },
 
   //any other route gets redirected to a PageNotFound component
   { path: '**', 
-   component: HomePageComponent
+   component: BeefNotFoundComponent
   }
 ];
 
@@ -48,13 +58,14 @@ const appRoutes: Routes = [
     AppComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,{ useHash: true }),
     BrowserModule,
     FormsModule,
     HttpModule,
     BeefBrowserModule,
     BeefLandingModule,
-    BeefDebateModule
+    BeefDebateModule,
+    BeefUtilitiesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
