@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DebatePageComponent } from './debate-page/debate-page.component';
+import { RouterModule } from '@angular/router';
+import { DebateComponent } from './debate/debate.component';
+import { BeefApiService } from '../beef-api/beef-api.service';
 
 @NgModule({
   imports: [
-    CommonModule
+      CommonModule,
+      RouterModule
   ],
-  declarations: [DebatePageComponent]
+  declarations: [DebateComponent],
+  exports: [DebateComponent],
+  providers: [BeefApiService]
 })
 export class BeefDebateModule { }

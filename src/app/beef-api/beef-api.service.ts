@@ -35,6 +35,16 @@ export class BeefApiService {
         return this._debates;
     }
 
+    public getDebatesByChannelName(channelName : string) {
+        return this._debates.filter(
+            debate => debate.channel_name == channelName);
+    }
+
+    public getDebateById(debateId : number) {
+        return this._debates.find(
+            debate => debate.debate_id == debateId);
+    }
+
     public addDebate(debateTitle: string, proponentId: number,
               channelId : number, channelName : string) {
         var debateUrl = "/debates/" + channelId;
