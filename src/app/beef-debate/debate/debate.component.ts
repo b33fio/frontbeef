@@ -26,6 +26,8 @@ export class DebateComponent implements OnInit {
     importModel(id : number) {
         this.debate = this.beefApi.getDebateById(id);
         this.points = this.beefApi.getPointsByDebate(id);
+
+        console.log(this.debate);
     }
 
 }
