@@ -35,7 +35,17 @@ export const POINTS = [
         "username": "user1",
         "up_votes": 10,
         "down_votes": 11
+    },
+    {
+        "point_id": 2,
+        "point_text": "emacs included things vim would need plugins for",
+        "debate_id": 1,
+        "user_id": 2,
+        "username": "user2",
+        "up_votes": 10,
+        "down_votes": 11
     }
+
 ]
 
 export const USERS = [
