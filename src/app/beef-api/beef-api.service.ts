@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
+import { User } from './classes/user';
+import { LoginCredentials } from './classes/login-credentials';
 
 @Injectable()
 export class BeefApiService {
@@ -87,25 +89,25 @@ export class BeefApiService {
     }
 
     /* for now just return true if valid user */
-    public login(email : string, password : string) {
+    public login(loginCredentials:LoginCredentials):boolean{
         for (let user of this._users) {
-            if ((user['email'] == email) && (user['pass'] == password))
+            if ((user.email === loginCredentials.email) && (user.password === loginCredentials.password)){
                 return true;
+            }
         }
         return false;
+        //TODO: return promise
     }
 
 
-    public register(email : string, password : string,
-                    name : string, birthday : Date, username : string,
-                    phone : string) {
-        this._users.push({
-            "username": username,
-            "pass": password,
-            "name": name,
-            "email" : email,
-            "birthday": birthday,
-            "phone" : phone
-        });
+    public register(user:User):boolean{
+        this._users.push(user);
+        console.log(this._users);
+        return true;
+        
+
+        //TODO: include mock logic to check for existing users
+        //TODO: return promise
+        //registering automatically logs a user in, is successful
     }
 }

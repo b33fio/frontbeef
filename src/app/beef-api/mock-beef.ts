@@ -1,3 +1,5 @@
+import { User } from './classes/user';
+
 export const CHANNELS = [
     {
         "channel_name": "Programming",
@@ -35,15 +37,11 @@ export const POINTS = [
         "up_votes": 10,
         "down_votes": 11
     }
-]
+];
 
-export const USERS = [
-	{
-		"username": "user1",
-        "pass": "password",
-		"name": "Mark Fontenot",
-		"email": "mfontenot@smu.edu",
-		"birthday": "01/01/1970",
-		"phone": "123-456-7890",
-	}
-]
+
+
+
+export const USERS: User[] = [
+    new User("user1","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890")
+];
