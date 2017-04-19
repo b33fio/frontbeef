@@ -74,6 +74,15 @@ export class BeefApiService {
         return this._points;
     }
 
+    public getPointsByDebate(debateId : number) {
+        /*
+        return this._points.filter(
+            point => point.debate_id == debateId);
+        */
+
+        return this._points;
+    }
+
     public addPoint(debateId : number, userId : number,
              pointText : string) {
         this._points.push({

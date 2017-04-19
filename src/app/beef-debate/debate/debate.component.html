@@ -4,4 +4,8 @@
 
 <div class="container">
     <h1>{{ this.debate.debate_title }} </h1>
+
+    <div class="well" *ngFor="let point of this.points">
+        {{ point.username }}: {{ point.point_text }}
+    </div>
 </div>
