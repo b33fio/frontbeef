@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SignupForm } from "./signup-form";
+import { User } from '../../beef-api/classes/user';
+import { BeefApiService } from '../../beef-api/beef-api.service';
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-signup',
@@ -8,14 +10,23 @@ import { SignupForm } from "./signup-form";
 })
 
 export class SignupComponent implements OnInit {
-  constructor() { }
+  constructor(private beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute) { }
   ngOnInit() {
   }
 
-  model = new SignupForm();
+  model = new User();
   submitted = false;
   onSubmit() { 
     this.submitted = true; 
+    let success = this.beefApiService.register(this.model);
+    if(success){
+      this.router.navigate([""]);
+    } else {
+      this.submitted = false; 
+      alert("invalid registracion, HANDLE ME!");
+    }
+
+
     //TODO: Call the api service to send the data
     //confirm success to user
     //redirect to home/browser page
