@@ -104,10 +104,16 @@ export class BeefApiService {
         this._users.push(user);
         console.log(this._users);
         return true;
-        
-
         //TODO: include mock logic to check for existing users
         //TODO: return promise
         //registering automatically logs a user in, is successful
     }
+
+    public checkLogin(user:User):boolean{
+        return true;
+        //TODO: include mock logic to check for existing users
+        //TODO: return promise
+        //registering automatically logs a user in, is successful
+    }
+
 }
