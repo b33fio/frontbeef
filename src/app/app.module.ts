@@ -8,19 +8,17 @@ import { BeefDebateModule } from './beef-debate/beef-debate.module'
 import { BeefUtilitiesModule } from './beef-utilities/beef-utilities.module'
 import { BeefAccountModule } from './beef-account/beef-account.module'
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './beef-landing/home-page/home-page.component';
 import { GlobalBrowserComponent } from './beef-browser/global-browser/global-browser.component';
 import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-browser.component';
 import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
 import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
+import { DebateComponent } from './beef-debate/debate/debate.component'
 import { LoginComponent } from './beef-account/login/login.component';
 import { LogoutComponent } from './beef-account/logout/logout.component';
 import { SignupComponent } from './beef-account/signup/signup.component';
 import { SettingsComponent } from './beef-account/settings/settings.component';
-import { DebatePageComponent } from './beef-debate/debate-page/debate-page.component';
-
 import { BeefApiService } from './beef-api/beef-api.service';
 
 const appRoutes: Routes = [
@@ -43,7 +41,7 @@ const appRoutes: Routes = [
   },
   //look at a debate (open/in-progres/closed as spectator/participant/public)
   { path: 'debate/:id',
-    component: DebatePageComponent
+    component: DebateComponent
   },
   //view account settings and edit
   { path: 'settings',

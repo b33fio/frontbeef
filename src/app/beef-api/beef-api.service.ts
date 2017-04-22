@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
+import { User } from './classes/user';
+import { LoginCredentials } from './classes/login-credentials';
 
 @Injectable()
 export class BeefApiService {
@@ -35,6 +37,16 @@ export class BeefApiService {
         return this._debates;
     }
 
+    public getDebatesByChannelName(channelName : string) {
+        return this._debates.filter(
+            debate => debate.channel_name == channelName);
+    }
+
+    public getDebateById(debateId : number) {
+        return this._debates.find(
+            debate => debate.debate_id == debateId);
+    }
+
     public addDebate(debateTitle: string, proponentId: number,
               channelId : number, channelName : string) {
         var debateUrl = "/debates/" + channelId;
@@ -64,6 +76,15 @@ export class BeefApiService {
         return this._points;
     }
 
+    public getPointsByDebate(debateId : number) {
+        /*
+        return this._points.filter(
+            point => point.debate_id == debateId);
+        */
+
+        return this._points;
+    }
+
     public addPoint(debateId : number, userId : number,
              pointText : string) {
         this._points.push({
@@ -77,25 +98,31 @@ export class BeefApiService {
     }
 
     /* for now just return true if valid user */
-    public login(email : string, password : string) {
+    public login(loginCredentials:LoginCredentials):boolean{
         for (let user of this._users) {
-            if ((user['email'] == email) && (user['pass'] == password))
+            if ((user.email === loginCredentials.email) && (user.password === loginCredentials.password)){
                 return true;
+            }
         }
         return false;
+        //TODO: return promise
     }
 
 
-    public register(email : string, password : string,
-                    name : string, birthday : Date, username : string,
-                    phone : string) {
-        this._users.push({
-            "username": username,
-            "pass": password,
-            "name": name,
-            "email" : email,
-            "birthday": birthday,
-            "phone" : phone
-        });
+    public register(user:User):boolean{
+        this._users.push(user);
+        console.log(this._users);
+        return true;
+        //TODO: include mock logic to check for existing users
+        //TODO: return promise
+        //registering automatically logs a user in, is successful
     }
+
+    public checkLogin(user:User):boolean{
+        return true;
+        //TODO: include mock logic to check for existing users
+        //TODO: return promise
+        //registering automatically logs a user in, is successful
+    }
+
 }

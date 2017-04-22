@@ -1,49 +1,22 @@
+import { User } from './classes/user';
+import { Point } from './classes/point';
+import { Debate } from './classes/debate';
+import { Channel } from './classes/channel';
+
 export const CHANNELS = [
-    {
-        "channel_name": "Programming",
-        "channel_id": 1,
-    },
-    {
-        "channel_name": "Politics",
-        "channel_id": 2,
-    }
+    new Channel("Programming",1),
+    new Channel("Politics",2)
 ];
 
 export const DEBATES = [
-    {
-        "debate_id": 1,
-        "debate_title": "Vim is better than emacs",
-        "debate_url": "/debates/1",
-        "opponent_id": 1,
-        "proponent_id": 2,
-        "channel_id": 1,
-        "channel_name": "Programming",
-        "create_date": 4382108430,
-        "update_date": 4480932082,
-        "views": 2000,
-        "up_votes": 500,
-        "down_votes": 123
-     }
+
+    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',"Programming",'4382108430','4480932082',2000,500,123)
 ];
 
 export const POINTS = [
-    {
-        "point_id": 1,
-        "point_text": "Vim is lightweight, emacs is bloated",
-        "debate_id": 1,
-        "user_id": 1,
-        "up_votes": 10,
-        "down_votes": 11
-    }
-]
+    new Point(1,1,1,10,11,"Vim is lightweight, emacs is bloated")
+];
 
-export const USERS = [
-	{
-		"username": "user1",
-        "pass": "password",
-		"name": "Mark Fontenot",
-		"email": "mfontenot@smu.edu",
-		"birthday": "01/01/1970",
-		"phone": "123-456-7890",
-	}
-]
+export const USERS: User[] = [
+    new User("user1","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890")
+];
