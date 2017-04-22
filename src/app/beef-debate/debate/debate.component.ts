@@ -10,6 +10,7 @@ import { BeefApiService } from '../../beef-api/beef-api.service';
 })
 export class DebateComponent implements OnInit {
     debate : any;
+    points : any[];
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -19,9 +20,14 @@ export class DebateComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(
-            x => this.debate = this.beefApi.getDebateById(x['id']));
-        console.log(this.debate);
+            x => this.importModel(x['id']));
     }
 
+    importModel(id : number) {
+        this.debate = this.beefApi.getDebateById(id);
+        this.points = this.beefApi.getPointsByDebate(id);
+
+        console.log(this.debate);
+    }
 
 }
