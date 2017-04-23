@@ -14,5 +14,7 @@ export class Debate {
         public up_votes?: number,
         public down_votes?: number,
         public points?:Point[],
+        public proponent_username?: string,
+        public opponent_username?: string
     ){};
 }
