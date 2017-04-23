@@ -1,0 +1,10 @@
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.glyphicon-arrow-right, .glyphicon-arrow-left {
+    font-size: 25px;
+}

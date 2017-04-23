@@ -10,11 +10,14 @@ export const CHANNELS = [
 
 export const DEBATES = [
 
-    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',"Programming",'4382108430','4480932082',2000,500,123)
+    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',
+        "Programming",'4382108430','4480932082',2000,500,123)
 ];
 
 export const POINTS = [
-    new Point(1,1,1,10,11,"Vim is lightweight, emacs is bloated")
+    new Point(1,1,1,10,11,"Vim is lightweight, emacs is bloated"),
+    new Point(2,1,2,10,11,"emacs has a lot built-in, where vim needs lots of plugins"),
+    new Point(3,1,2,10,11,"emacs comes with tetris")
 ];
 
 export const USERS: User[] = [
