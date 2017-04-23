@@ -16,10 +16,12 @@ export const POINTS = [
 
 export const DEBATES = [
     new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',
-        "Programming",'4382108430','4480932082',2000,500,123, POINTS)
+        "Programming",'4382108430','4480932082',2000,500,123, POINTS, "mfonten",
+        "lhansen")
 ];
 
 
 export const USERS: User[] = [
-    new User("user1","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890")
+    new User("fmonten","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890"),
+    new User("lhansen","password","Luke Hansen","lhansen@smu.edu","01/01/1970","555-555-5555")
 ];
