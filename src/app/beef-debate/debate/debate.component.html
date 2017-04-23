@@ -6,30 +6,33 @@
     <h1>{{ this.debate.debate_title }} </h1>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <h3> {{ this.debate.proponent_username }} </h3>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-5 col-md-offset-2">
             <h3> {{ this.debate.opponent_username }} </h3>
         </div>
     </div>
 
-    <div class="col-md-6 well" *ngFor="let point of this.points">
-        {{ point.point_text }}
+    <div class="row" *ngFor="let row of rows">
+        <div class="col-md-5">
+            <div class="well point_container" *ngIf="row.leftPoint">
+                {{ row.leftPoint.text_content }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="arrow-container" *ngIf="row.arrowDirection">
+                <div>
+                    <span class="glyphicon glyphicon-arrow-{{row.arrowDirection}}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="well point_container" *ngIf="row.rightPoint">
+                {{ row.rightPoint.text_content }}
+            </div>
+        </div>
     </div>
-
-    <!-- empty filler point -->
-    <div *ngIf="this.points % 2 != 0" class="col-md-6">
-    </div>
-
-    <div class="col-md-6 well">
-        pending
-    </div>
-
-    <!-- empty filler point -->
-    <div *ngIf="this.points % 2 == 0" class="col-md-6">
-    </div>
-
 
 </div>
