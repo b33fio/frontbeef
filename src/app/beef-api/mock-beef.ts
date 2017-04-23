@@ -15,7 +15,7 @@ export const POINTS = [
 ];
 
 export const DEBATES = [
-    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',
+    new Debate(1,"Vim is better than emacs","/debate/1",'1','2','1',
         "Programming",'4382108430','4480932082',2000,500,123, POINTS, "mfonten",
         "lhansen")
 ];

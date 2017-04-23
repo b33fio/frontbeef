@@ -1,3 +1,11 @@
-<p>
-  my-debates works!
-</p>
+<div class="container">
+	<h1>My Debates</h1>
+	<ul class="list-group">
+	  <li class="list-group-item" *ngFor="let debate of debates">
+          <span class="badge">{{ debate.points.length }}</span>
+          <a routerLink="{{ debate.debate_url }}">
+              {{ debate.debate_title }}
+  		 </a>
+	  </li>
+	</ul>
+</div>
