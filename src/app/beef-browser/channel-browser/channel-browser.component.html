@@ -3,7 +3,7 @@
 
 	<ul class="list-group">
 	  <li class="list-group-item" *ngFor="let debate of debates">
-		<span class="badge">5</span>
+          <span class="badge">{{ debate.points.length }} </span>
         <span routerLink="/debate/{{ debate.debate_id }}">
              {{ debate.debate_title }}
         </span>

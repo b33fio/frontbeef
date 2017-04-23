@@ -13,6 +13,6 @@ export class Debate {
         public views?: number,
         public up_votes?: number,
         public down_votes?: number,
-        public points?:Point[]
+        public points?:Point[],
     ){};
 }
