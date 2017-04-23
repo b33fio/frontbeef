@@ -4,14 +4,8 @@ import { Debate } from './classes/debate';
 import { Channel } from './classes/channel';
 
 export const CHANNELS = [
-    new Channel("Programming",1),
-    new Channel("Politics",2)
-];
-
-export const DEBATES = [
-
-    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',
-        "Programming",'4382108430','4480932082',2000,500,123)
+    new Channel("Programming",1,1),
+    new Channel("Politics",2,0)
 ];
 
 export const POINTS = [
@@ -19,6 +13,12 @@ export const POINTS = [
     new Point(2,1,2,10,11,"emacs has a lot built-in, where vim needs lots of plugins"),
     new Point(3,1,2,10,11,"emacs comes with tetris")
 ];
+
+export const DEBATES = [
+    new Debate(1,"Vim is better than emacs","/debates/1",'1','2','1',
+        "Programming",'4382108430','4480932082',2000,500,123, POINTS)
+];
+
 
 export const USERS: User[] = [
     new User("user1","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890")

@@ -7,7 +7,7 @@
 	<h1>Channels</h1>
 	<ul class="list-group">
 	  <li class="list-group-item" *ngFor="let channel of channels">
-		<span class="badge">5</span>
+          <span class="badge">{{ channel.num_debates }}</span>
 		 <a routerLink="/browse/{{ channel.channel_name }}">
              {{ channel.channel_name }}
   		 </a>
