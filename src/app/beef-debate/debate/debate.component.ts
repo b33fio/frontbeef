@@ -17,6 +17,7 @@ export class DebateComponent implements OnInit {
     points : Point[];
     rows : any[];
     pointText : string;
+    postPermission : boolean;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -28,6 +29,9 @@ export class DebateComponent implements OnInit {
         this.route.params.subscribe(
             x => this.importModel(x['id']));
         this.generateRows();
+
+        //TODO: get this from session
+        this.postPermission = true;
     }
 
     importModel(id : number) {
@@ -41,6 +45,7 @@ export class DebateComponent implements OnInit {
         this.beefApi.addPoint(1, 1, this.pointText);
         this.points = this.beefApi.getPointsByDebate(1);
         this.generateRows();
+        this.postPermission = false;
     }
 
     generateRows() {
