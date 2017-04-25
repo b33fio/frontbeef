@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
 import { User } from './classes/user';
+import { Point } from './classes/point';
 import { LoginCredentials } from './classes/login-credentials';
 
 @Injectable()
@@ -87,14 +88,10 @@ export class BeefApiService {
 
     public addPoint(debateId : number, userId : number,
              pointText : string) {
-        this._points.push({
-            "point_id" : this._points.length + 1,
-            "point_text" : pointText,
-            "debate_id": debateId,
-            "user_id": userId,
-            "up_votes": 0,
-            "down_votes": 0
-        });
+        var _newId = this._points.length;
+        this._points.push(
+            new Point(_newId, debateId, userId, 10,11, pointText)
+        );
     }
 
     /* for now just return true if valid user */

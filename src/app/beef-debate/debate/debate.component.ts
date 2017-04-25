@@ -16,6 +16,7 @@ export class DebateComponent implements OnInit {
     debate : Debate[];
     points : Point[];
     rows : any[];
+    pointText : string;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -33,6 +34,13 @@ export class DebateComponent implements OnInit {
         this.debate = this.beefApi.getDebateById(id);
         this.points = this.beefApi.getPointsByDebate(id);
 
+    }
+
+    submitPoint() {
+        // TODO: remove hard coded IDs
+        this.beefApi.addPoint(1, 1, this.pointText);
+        this.points = this.beefApi.getPointsByDebate(1);
+        this.generateRows();
     }
 
     generateRows() {
