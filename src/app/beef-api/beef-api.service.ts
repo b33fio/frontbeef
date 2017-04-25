@@ -10,6 +10,7 @@ export class BeefApiService {
     _debates : any[];
     _points : any[];
     _users : any[];
+    currentUser: User;
 
     constructor() {
         this.loadMockData();
@@ -101,6 +102,7 @@ export class BeefApiService {
     public login(loginCredentials:LoginCredentials):boolean{
         for (let user of this._users) {
             if ((user.email === loginCredentials.email) && (user.password === loginCredentials.password)){
+                this.currentUser = user;
                 return true;
             }
         }
@@ -118,11 +120,13 @@ export class BeefApiService {
         //registering automatically logs a user in, is successful
     }
 
-    public checkLogin(user:User):boolean{
-        return true;
-        //TODO: include mock logic to check for existing users
-        //TODO: return promise
-        //registering automatically logs a user in, is successful
+    public getUser():User{
+        return this.currentUser;
     }
 
+    public logout():boolean{
+        this.currentUser = undefined;
+        return true;
+    }
+    
 }
