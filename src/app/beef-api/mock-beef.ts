@@ -25,6 +25,6 @@ export const DEBATES = [
 
 
 export const USERS: User[] = [
-    new User("fmonten","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890"),
-    new User("lhansen","password","Luke Hansen","lhansen@smu.edu","01/01/1970","555-555-5555")
+    new User("fmonten","password","Fark Montenot","mfontenot@smu.edu","01/01/1970","123-456-7890",1),
+    new User("lhansen","password","Luke Hansen","lhansen@smu.edu","01/01/1970","555-555-5555",2)
 ];

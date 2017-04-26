@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
 import { User } from './classes/user';
+import { Debate } from './classes/debate';
 import { Point } from './classes/point';
 import { LoginCredentials } from './classes/login-credentials';
 
@@ -109,9 +110,10 @@ export class BeefApiService {
 
 
     public register(user:User):boolean{
+        user.id = Math.max.apply(Math,this._users.map(x => x.id)) + 1;
         this._users.push(user);
-        console.log(this._users);
         return true;
+        
         //TODO: include mock logic to check for existing users
         //TODO: return promise
         //registering automatically logs a user in, is successful
@@ -125,5 +127,9 @@ export class BeefApiService {
         this.currentUser = undefined;
         return true;
     }
-    
+    public getMyDebates():Debate[]{
+        return this._debates.filter(
+            debate => debate.proponent_id==this.currentUser.id || 
+            debate.opponent_id==this.currentUser.id);
+    }
 }
