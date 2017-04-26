@@ -1,0 +1,47 @@
+<div class="container">
+    <h1>{{ this.debate.debate_title }} </h1>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3> {{ this.debate.proponent_username }} </h3>
+        </div>
+
+        <div class="col-md-5 col-md-offset-2">
+            <h3> {{ this.debate.opponent_username }} </h3>
+        </div>
+    </div>
+
+    <div class="row" *ngFor="let row of rows">
+        <div class="col-md-5">
+            <div class="well point_container" *ngIf="row.leftPoint">
+                {{ row.leftPoint.text_content }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="arrow-container" *ngIf="row.arrowDirection">
+                <div>
+                    <span class="glyphicon glyphicon-arrow-{{row.arrowDirection}}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="well point_container" *ngIf="row.rightPoint">
+                {{ row.rightPoint.text_content }}
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="this.postPermission" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="pointTextForm">Your point:</label>
+                <textarea id="pointTextForm" class="form-control"
+                    rows="3" [(ngModel)]="pointText"></textarea>
+            </div>
+            <button (click)="this.submitPoint()" type="submit" class="btn btn-default">Submit</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
