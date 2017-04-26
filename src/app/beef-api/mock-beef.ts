@@ -11,7 +11,10 @@ export const CHANNELS = [
 export const POINTS = [
     new Point(1,1,1,10,11,"Vim is lightweight, emacs is bloated"),
     new Point(2,1,2,10,11,"emacs has a lot built-in, where vim needs lots of plugins"),
-    new Point(3,1,2,10,11,"emacs comes with tetris")
+    new Point(3,1,2,10,11,"emacs comes with tetris"),
+    new Point(4,1,1,10,11,"games shouldn't be in a text editor"),
+    new Point(5,1,1,10,11,"vims modal editing reduces carpal tunnel"),
+    new Point(6,1,2,10,11,"emacs supports modal editing with evil mode")
 ];
 
 export const DEBATES = [

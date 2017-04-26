@@ -16,6 +16,8 @@ export class DebateComponent implements OnInit {
     debate : Debate[];
     points : Point[];
     rows : any[];
+    pointText : string;
+    postPermission : boolean;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -27,6 +29,9 @@ export class DebateComponent implements OnInit {
         this.route.params.subscribe(
             x => this.importModel(x['id']));
         this.generateRows();
+
+        //TODO: get this from session
+        this.postPermission = true;
     }
 
     importModel(id : number) {
@@ -35,15 +40,38 @@ export class DebateComponent implements OnInit {
 
     }
 
+    submitPoint() {
+        // TODO: remove hard coded IDs
+        this.beefApi.addPoint(1, 1, this.pointText);
+        this.points = this.beefApi.getPointsByDebate(1);
+        this.generateRows();
+        this.postPermission = false;
+    }
+
     generateRows() {
         var rows = [];
+
+        // used to determine "snaking" of points
+        var rowNumber = 0;
+
         var arrowDirection = "right";
-        for (var i = 0; i < this.points.length-1; i += 2) {
-            rows.push({
-                "leftPoint": this.points[i],
-                "rightPoint": this.points[i+1],
-                "arrowDirection": arrowDirection
-            });
+
+        // Collect points into rows
+        for (var i = 0; i < this.points.length-1; i += 2, rowNumber += 1) {
+
+            if (rowNumber % 2 == 0) {
+                rows.push({
+                    "leftPoint": this.points[i],
+                    "rightPoint": this.points[i+1],
+                    "arrowDirection": arrowDirection
+                });
+            } else {
+                rows.push({
+                    "leftPoint": this.points[i+1],
+                    "rightPoint": this.points[i],
+                    "arrowDirection": arrowDirection
+                });
+            }
 
             if (arrowDirection == "left")
                 arrowDirection = "right";
@@ -51,6 +79,7 @@ export class DebateComponent implements OnInit {
                 arrowDirection = "left";
         }
 
+        // Add pending point
         if (this.points.length == 1) {
             rows.push({
                 "leftPoint": this.points[this.points.length-1],
@@ -58,17 +87,33 @@ export class DebateComponent implements OnInit {
                 "arrowDirection": arrowDirection
             });
         } else if(this.points.length % 2 != 0) {
-            rows.push({
-                "leftPoint": {"text_content": "Pending..."},
-                "rightPoint": this.points[this.points.length-1],
-                "arrowDirection": arrowDirection
-            });
+            if (rowNumber % 2 != 0) {
+                rows.push({
+                    "leftPoint": {"text_content": "Pending..."},
+                    "rightPoint": this.points[this.points.length-1],
+                    "arrowDirection": arrowDirection
+                });
+            } else {
+                rows.push({
+                    "leftPoint": this.points[this.points.length-1],
+                    "rightPoint": {"text_content": "Pending..."},
+                    "arrowDirection": arrowDirection
+                });
+            }
         } else {
-            rows.push({
-                "leftPoint": null,
-                "rightPoint": {"text_content": "Pending..."},
-                "arrowDirection": null
-            });
+            if (rowNumber % 2 != 0) {
+                rows.push({
+                    "leftPoint": null,
+                    "rightPoint": {"text_content": "Pending..."},
+                    "arrowDirection": null
+                });
+            } else {
+                rows.push({
+                    "leftPoint": {"text_content": "Pending..."},
+                    "rightPoint": null,
+                    "arrowDirection": null
+                });
+            }
         }
 
         this.rows = rows;
