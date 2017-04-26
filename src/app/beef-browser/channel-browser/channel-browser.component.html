@@ -1,13 +1,12 @@
 <div class="container">
     <h1>{{ this.channelName }}</h1>
 
-	<ul class="list-group">
+	<ul *ngIf="this.debates" class="list-group">
 	  <li class="list-group-item" *ngFor="let debate of debates">
-          <span class="badge">{{ debate.points.length }} </span>
+          <span class="badge">{{ debate?.points?.length || 0 }} </span>
         <span routerLink="/debate/{{ debate.debate_id }}">
-             {{ debate.debate_title }}
+             {{ debate.debate_name }}
         </span>
 	  </li>
 	</ul>
-
 </div>

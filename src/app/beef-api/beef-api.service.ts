@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Http, Response }          from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
 import { User } from './classes/user';
 import { Debate } from './classes/debate';
 import { Point } from './classes/point';
+import { Channel } from './classes/channel';
 import { LoginCredentials } from './classes/login-credentials';
+
 
 @Injectable()
 export class BeefApiService {
@@ -14,8 +19,11 @@ export class BeefApiService {
     _users : any[];
     currentUser: User;
 
-    constructor() {
-        this.loadMockData();
+    private apiUrl = 'http://b33f.io/api/public';  // URL to web API
+
+
+    constructor(private http : Http) {
+        //this.loadMockData();
     }
 
     private loadMockData() {
@@ -25,24 +33,39 @@ export class BeefApiService {
         this._users = USERS;
     }
 
-    public getChannels() {
-        return this._channels;
+    public getChannels() : Promise<Channel[]> {
+        //return this._channels;
+        return this.http.get(`${this.apiUrl}/channels`).toPromise()
+            .then(x => x.json() as Channel[]).catch(x => x.message);
     }
 
     public addChannel(channelName : string ) {
+        // TODO: add api here
         this._channels.push({
                 "channel_name": channelName,
                 "channel_id": this._channels.length
         });
     }
 
-    public getDebates() {
-        return this._debates;
+    public getDebates() : Promise<Debate[]> {
+        //return this._debates;
+        return this.http.get(`${this.apiUrl}/debates`).toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json() as Debate[];
+        }).catch(x => x.message);
+
     }
 
-    public getDebatesByChannelName(channelName : string) {
-        return this._debates.filter(
-            debate => debate.channel_name == channelName);
+    public getDebatesByChannelName(channelName : string) : Promise<Debate[]>{
+        //return this._debates.filter(
+        //    debate => debate.channel_name == channelName);
+        //TODO: change this to debate by channel
+        return this.http.get(`${this.apiUrl}/debates`).toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json() as Debate[];
+        }).catch(x => x.message);
     }
 
     public getDebateById(debateId : number) {

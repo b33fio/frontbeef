@@ -14,7 +14,7 @@ export class GlobalBrowserComponent implements OnInit {
     channels : Channel[];
 
     constructor(private beefApi : BeefApiService) {
-        this.channels = beefApi.getChannels();
+        this.beefApi.getChannels().then(x => this.channels = x);
         console.log(this.channels);
     }
 
