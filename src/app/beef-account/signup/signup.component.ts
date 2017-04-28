@@ -18,14 +18,16 @@ export class SignupComponent implements OnInit {
   submitted = false;
   onSubmit() { 
     this.submitted = true; 
-    let success = this.beefApiService.register(this.model);
-    if(success){
-      this.router.navigate([""]);
-    } else {
-      this.submitted = false; 
-      alert("invalid registracion, HANDLE ME!");
-    }
 
+    this.beefApiService.register(this.model).then((res)=>{
+      console.log(res.json());
+      if(res.status==200){
+        this.router.navigate([""]);
+      } else {
+        this.submitted = false; 
+        alert("invalid registracion, HANDLE ME!");
+      }
+    });
 
     //TODO: Call the api service to send the data
     //confirm success to user

@@ -5,6 +5,8 @@ import { User } from './classes/user';
 import { Debate } from './classes/debate';
 import { Point } from './classes/point';
 import { LoginCredentials } from './classes/login-credentials';
+import 'rxjs/add/operator/toPromise';
+import { Http, Headers, Response } from '@angular/http';
 
 @Injectable()
 export class BeefApiService {
@@ -14,7 +16,7 @@ export class BeefApiService {
     _users : any[];
     currentUser: User;
 
-    constructor() {
+    constructor(private http: Http) {
         this.loadMockData();
     }
 
@@ -109,10 +111,20 @@ export class BeefApiService {
     }
 
 
-    public register(user:User):boolean{
-        user.id = Math.max.apply(Math,this._users.map(x => x.id)) + 1;
-        this._users.push(user);
-        return true;
+    public register(user:User):Promise<any>{
+        let req = {
+            "first_name": user.name,
+            "username": user.username,
+            "user_type": "user",
+            "password": user.password,
+            "email": user.email,
+            "phone_number": user.phone
+        }
+        return this.http
+			.post("http://b33f.io/api/public/register", req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
         
         //TODO: include mock logic to check for existing users
         //TODO: return promise
