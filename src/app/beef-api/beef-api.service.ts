@@ -51,7 +51,6 @@ export class BeefApiService {
         //return this._debates;
         return this.http.get(`${this.apiUrl}/debates`).toPromise()
         .then(function(x) {
-            console.log(x.json());
             return x.json() as Debate[];
         }).catch(x => x.message);
 
@@ -60,17 +59,32 @@ export class BeefApiService {
     public getDebatesByChannelName(channelName : string) : Promise<Debate[]>{
         //return this._debates.filter(
         //    debate => debate.channel_name == channelName);
-        //TODO: change this to debate by channel
-        return this.http.get(`${this.apiUrl}/debates`).toPromise()
+        return this.http.get(`${this.apiUrl}/debates/channel/${channelName}`)
+        .toPromise()
         .then(function(x) {
             console.log(x.json());
             return x.json() as Debate[];
         }).catch(x => x.message);
     }
 
-    public getDebateById(debateId : number) {
-        return this._debates.find(
-            debate => debate.debate_id == debateId);
+    public getDebatesByChannelID(channelID : number) : Promise<Debate[]>{
+        return this.http.get(`${this.apiUrl}/debates/channel/${channelID}`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json() as Debate[];
+        }).catch(x => x.message);
+    }
+
+
+    public getDebateById(debateID : number) : Promise<any> {
+        return this.http.get(`${this.apiUrl}/debates/${debateID}`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json();
+        }).catch(x => x.message);
+
     }
 
     public addDebate(debateTitle: string, proponentId: number,
@@ -144,6 +158,15 @@ export class BeefApiService {
 
     public getUser():User{
         return this.currentUser;
+    }
+
+    public getUsers() : Promise<any[]> {
+        return this.http.get(`${this.apiUrl}/users`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json();
+        }).catch(x => x.message);
     }
 
     public logout():boolean{

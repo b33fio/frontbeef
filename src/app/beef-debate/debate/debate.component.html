@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="debate" class="container">
     <h1>{{ this.debate.debate_title }} </h1>
 
     <div class="row">
@@ -14,7 +14,7 @@
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.leftPoint">
-                {{ row.leftPoint.text_content }}
+                {{ row.leftPoint.point_name }}
             </div>
         </div>
         <div class="col-md-2">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.rightPoint">
-                {{ row.rightPoint.text_content }}
+                {{ row.rightPoint.point_name }}
             </div>
         </div>
     </div>

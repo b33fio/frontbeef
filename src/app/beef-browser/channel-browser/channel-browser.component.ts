@@ -23,7 +23,7 @@ export class ChannelBrowserComponent implements OnInit {
         this.route.params.subscribe(x => this.channelName = x['channel']);
         //TODO: change this to debates by channel
         this.debates = undefined;
-        this.beefApi.getDebates()
+        this.beefApi.getDebatesByChannelName(this.channelName)
             .then(x => this.debates = x);
     }
 
