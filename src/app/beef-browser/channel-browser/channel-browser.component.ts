@@ -21,8 +21,10 @@ export class ChannelBrowserComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(x => this.channelName = x['channel']);
-        this.debates = this.beefApi.getDebatesByChannelName(this.channelName);
-        console.log(this.debates);
+        //TODO: change this to debates by channel
+        this.debates = undefined;
+        this.beefApi.getDebatesByChannelName(this.channelName)
+            .then(x => this.debates = x);
     }
 
 

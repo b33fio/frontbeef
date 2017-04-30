@@ -13,7 +13,8 @@ export class MyDebatesComponent implements OnInit {
 
     constructor(private beefApi : BeefApiService) {
         // TODO: set this to current session user's debates
-        this.debates = beefApi.getDebates();
+        //this.debates = beefApi.getDebates();
+        this.beefApi.getDebates().then(x => this.debates = x);
     }
 
     ngOnInit() {
