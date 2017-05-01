@@ -10,7 +10,7 @@ import { Router, ActivatedRoute} from '@angular/router'
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute) { }
+  constructor(public beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute) { }
   user:User;
 
   ngOnInit() {
@@ -20,5 +20,4 @@ export class HomePageComponent implements OnInit {
   ngAfterViewChecked() {
     
   }
-
 }
