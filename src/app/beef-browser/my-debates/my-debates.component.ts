@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { BeefApiService } from '../../beef-api/beef-api.service';
 import { Debate } from '../../beef-api/classes/debate';
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-my-debates',
@@ -9,15 +9,28 @@ import { Debate } from '../../beef-api/classes/debate';
   styleUrls: ['./my-debates.component.css']
 })
 export class MyDebatesComponent implements OnInit {
-    debates: Debate[];
+    debates: any[];
+    message;
 
-    constructor(private beefApi : BeefApiService) {
-        // TODO: set this to current session user's debates
-        //this.debates = beefApi.getDebates();
-        this.beefApi.getDebates().then(x => this.debates = x);
+    constructor(private beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-
+        this.beefApiService.getDebates().then( (res) => {
+            try{
+                res.json();
+            } catch (e){
+                return;
+            }
+            if(res.status===200){
+                this.debates= res.json().debates;
+            } else {
+                this.message = 'Server responded with: "Unable to Fetch Your Debates';
+            }
+            
+        });
+    }
+    goToDebate(id){
+        this.router.navigate(["debate",id]);
     }
 }

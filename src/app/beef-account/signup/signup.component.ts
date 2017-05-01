@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
     };
 
     this.beefApiService.register(req).then((res)=>{
-      if(res.status!=200){
+      if(res.status==200){
         this.router.navigate([""]);
       } else {
         this.submitted = false; 

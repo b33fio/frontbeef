@@ -3,19 +3,21 @@
 
     <div class="row">
         <div class="col-md-5">
-            <h3> {{ this.debate.proponent }} </h3>
+            <h3> {{ this.debate.proponent_username }} </h3>
         </div>
 
         <div class="col-md-5 col-md-offset-2">
-            <h3> {{ this.debate.opponent}} </h3>
+            <h3> {{ this.debate.opponent_username || "Waiting for Opponent"}} </h3>
         </div>
     </div>
 
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.leftPoint">
-                {{ row.leftPoint.username }}
-                {{ row.leftPoint.point_text }}
+                <span> {{ row.leftPoint.point_text }}</span> 
+                <br>
+                <small class="pull-right pull-down">{{ row.leftPoint.point_created }} </small>
+
             </div>
         </div>
         <div class="col-md-2">
@@ -27,8 +29,9 @@
         </div>
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.rightPoint">
-                {{ row.rightPoint.username }}
-                {{ row.rightPoint.point_text }}
+                <span> {{ row.rightPoint.point_text }} </span>
+                <br>
+                <small class="pull-right pull-down">{{ row.rightPoint.point_created }} </small>
             </div>
         </div>
     </div>

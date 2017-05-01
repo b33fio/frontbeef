@@ -45,11 +45,11 @@ export class BeefApiService {
         });
     }
 
-    public getDebates() : Promise<Debate[]> {
+    public getDebates() : Promise<any> {
         //return this._debates;
         return this.http.get(`${this.apiUrl}/debates`).toPromise()
         .then(function(x) {
-            return x.json() as Debate[];
+            return x;
         }).catch(x => x.message);
 
     }
@@ -123,12 +123,17 @@ export class BeefApiService {
         return this._points;
     }
 
-    public addPoint(debateId : number, userId : number,
-             pointText : string) {
-        var _newId = this._points.length;
-        this._points.push(
-            new Point(_newId, debateId, userId, 10,11, pointText)
-        );
+    public postPoint(debateId : number, pointText : string):Promise<any> {
+        let req = {
+            debate_id: debateId,
+            point_text: pointText,
+            jwt:this.jwt
+        };
+        return this.http
+			.post(`${this.apiUrl}/points`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 
     /* for now just return true if valid user */

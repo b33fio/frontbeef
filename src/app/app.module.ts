@@ -22,6 +22,7 @@ import { SignupComponent } from './beef-account/signup/signup.component';
 import { SettingsComponent } from './beef-account/settings/settings.component';
 import { BeefApiService } from './beef-api/beef-api.service';
 import { VerifyComponent } from './beef-account/verify/verify.component';
+import { VerifyMessageComponent } from './beef-account/verify-message/verify-message.component';
 
 const appRoutes: Routes = [
   //landing page, handles login/sign up
@@ -57,8 +58,11 @@ const appRoutes: Routes = [
   { path: 'login',
     component: LoginComponent
   },
-  { path: 'verify/:token',
+    { path: 'verify/:token',
     component: VerifyComponent
+  },
+  { path: 'verify',
+    component: VerifyMessageComponent
   },
   //any other route gets redirected to a PageNotFound component
   { path: '**',

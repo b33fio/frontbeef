@@ -23,16 +23,19 @@ export class VerifyComponent implements OnInit {
       console.log(this.token);
       
       this.beefApi.verifyToken(this.token).then((res)=>{
-        if(res.status==200&&res.successful){
+        if(res.status==200&&res.json().successful){
           this.confirmed=true;
         } else {
           this.loading=false;
           this.rejected=true;
         }
+        this.loading=false;
       });
-    });
+    }); 
+  }
 
-    
+  login(){
+    this.router.navigate([""]);
   }
 
 }
