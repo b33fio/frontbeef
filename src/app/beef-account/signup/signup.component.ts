@@ -13,18 +13,27 @@ export class SignupComponent implements OnInit {
   constructor(private beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute) { }
   ngOnInit() {
   }
-
+  message;
   model = new User();
   submitted = false;
   onSubmit() { 
     this.submitted = true; 
+    let req = {
+      first_name: this.model.name,
+      username: this.model.username,
+      user_type: "user",
+      password: this.model.password,
+      password_check: this.model.password,
+      email: this.model.email,
+      phone_number: +this.model.phone
+    };
 
-    this.beefApiService.register(this.model).then((res)=>{
+    this.beefApiService.register(req).then((res)=>{
       if(res.status!=200){
         this.router.navigate([""]);
       } else {
         this.submitted = false; 
-        alert("Server Error, try again!");
+        this.message = "Server responded with: " + res.json().error;
       }
     });
 

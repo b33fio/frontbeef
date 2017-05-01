@@ -29,14 +29,15 @@ export class LoginComponent implements OnInit {
         this.message = "Server Error, Try again!";
         return;
       }
-      if(res.status===200){
+      if(res.status===200 && res.successful){
         let user:User = new User();
         user.username = this.model.username;
         this.beefApiService.setCurrentUser(user);
+        this.beefApiService.setJwt(res.json().jwt);
         this.router.navigate([""]);
       } else {
         this.submitted = false; 
-        this.message = "Invalid Credentials, Try again!";
+        this.message = "Server responded with: " + res.json().error;
       }
     });
 

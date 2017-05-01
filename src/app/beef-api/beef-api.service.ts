@@ -15,6 +15,7 @@ export class BeefApiService {
     _points : any[];
     _users : any[];
     currentUser: User;
+    jwt:string;
 
 
     private apiUrl = 'https://b33f.io/api/public';  // URL to web API
@@ -30,10 +31,10 @@ export class BeefApiService {
         this._users = USERS;
     }
 
-    public getChannels() : Promise<Channel[]> {
+    public getChannels() : Promise<any> {
         //return this._channels;
         return this.http.get(`${this.apiUrl}/channels`).toPromise()
-            .then(x => x.json() as Channel[]).catch(x => x.message);
+            .then(x => x).catch(x => x.message);
     }
 
     public addChannel(channelName : string ) {
@@ -146,19 +147,12 @@ export class BeefApiService {
     public setCurrentUser(user:User){
         this.currentUser = user;
     }
-
-
-    public register(user:User):Promise<any>{
-        let req = {
-            "first_name": user.name,
-            "username": user.username,
-            "user_type": "user",
-            "password": user.password,
-            "email": user.email,
-            "phone_number": user.phone
-        }
+    public setJwt(jwt){
+        this.jwt = jwt;
+    }
+    public register(data):Promise<any>{
         return this.http
-			.post(`${this.apiUrl}/register`, req)
+			.post(`${this.apiUrl}/register`, data)
             .toPromise()
 			.then(x => x)
 			.catch(x => x.message);
@@ -183,11 +177,19 @@ export class BeefApiService {
 
     public logout():boolean{
         this.currentUser = undefined;
+        this.jwt = undefined;
         return true;
     }
     public getMyDebates():Debate[]{
         return this._debates.filter(
             debate => debate.proponent_id==this.currentUser.id || 
             debate.opponent_id==this.currentUser.id);
+    }
+    public verifyToken(token):Promise<any>{
+        return this.http
+			.get(`${this.apiUrl}/token/`+ token)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 }

@@ -21,6 +21,7 @@ import { LogoutComponent } from './beef-account/logout/logout.component';
 import { SignupComponent } from './beef-account/signup/signup.component';
 import { SettingsComponent } from './beef-account/settings/settings.component';
 import { BeefApiService } from './beef-api/beef-api.service';
+import { VerifyComponent } from './beef-account/verify/verify.component';
 
 const appRoutes: Routes = [
   //landing page, handles login/sign up
@@ -56,9 +57,8 @@ const appRoutes: Routes = [
   { path: 'login',
     component: LoginComponent
   },
-  //view account settings and edit
-  { path: 'logout',
-    component: LogoutComponent
+  { path: 'verify/:token',
+    component: VerifyComponent
   },
   //any other route gets redirected to a PageNotFound component
   { path: '**',
