@@ -11,7 +11,7 @@ import { User } from './beef-api/classes/user'
 export class AppComponent {
   title = 'Beef Master Test';
   user:User;
-  constructor(private beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute){};
+  constructor(public beefApiService: BeefApiService,private router: Router,private route: ActivatedRoute){};
   ngOnInit() {
     //this.ngAfterViewChecked()
     this.user = this.beefApiService.getUser();
