@@ -14,7 +14,7 @@
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.leftPoint">
-                {{ row.leftPoint.point_name }}
+                {{ row.leftPoint.point_text }}
             </div>
         </div>
         <div class="col-md-2">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.rightPoint">
-                {{ row.rightPoint.point_name }}
+                {{ row.rightPoint.point_text }}
             </div>
         </div>
     </div>
