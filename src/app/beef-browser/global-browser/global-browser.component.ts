@@ -15,7 +15,7 @@ export class GlobalBrowserComponent implements OnInit {
     error:string;
 
     constructor(private beefApi : BeefApiService) {
-        
+
     }
 
     ngOnInit() {

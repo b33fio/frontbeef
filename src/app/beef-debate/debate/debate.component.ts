@@ -34,6 +34,7 @@ export class DebateComponent implements OnInit {
                 __this.debate = x['debate'];
                 __this.points = x['points'];
                 __this.generateRows();
+                console.log(__this.rows);
             }));
 
         //TODO: get this from session
@@ -89,20 +90,20 @@ export class DebateComponent implements OnInit {
         if (this.points.length == 1) {
             rows.push({
                 "leftPoint": this.points[this.points.length-1],
-                "rightPoint": {"text_content": "Pending..."},
+                "rightPoint": {"point_text": "Pending..."},
                 "arrowDirection": arrowDirection
             });
         } else if(this.points.length % 2 != 0) {
             if (rowNumber % 2 != 0) {
                 rows.push({
-                    "leftPoint": {"text_content": "Pending..."},
+                    "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": this.points[this.points.length-1],
                     "arrowDirection": arrowDirection
                 });
             } else {
                 rows.push({
                     "leftPoint": this.points[this.points.length-1],
-                    "rightPoint": {"text_content": "Pending..."},
+                    "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": arrowDirection
                 });
             }
@@ -110,12 +111,12 @@ export class DebateComponent implements OnInit {
             if (rowNumber % 2 != 0) {
                 rows.push({
                     "leftPoint": null,
-                    "rightPoint": {"point_name": "Pending..."},
+                    "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": null
                 });
             } else {
                 rows.push({
-                    "leftPoint": {"point_name": "Pending..."},
+                    "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": null,
                     "arrowDirection": null
                 });
