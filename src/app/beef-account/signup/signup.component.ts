@@ -20,12 +20,11 @@ export class SignupComponent implements OnInit {
     this.submitted = true; 
 
     this.beefApiService.register(this.model).then((res)=>{
-      console.log(res.json());
-      if(res.status==200){
+      if(res.status!=200){
         this.router.navigate([""]);
       } else {
         this.submitted = false; 
-        alert("invalid registracion, HANDLE ME!");
+        alert("Server Error, try again!");
       }
     });
 

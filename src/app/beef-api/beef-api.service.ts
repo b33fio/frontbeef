@@ -8,7 +8,6 @@ import { LoginCredentials } from './classes/login-credentials';
 import 'rxjs/add/operator/toPromise';
 import { Http, Headers, Response } from '@angular/http';
 
-
 @Injectable()
 export class BeefApiService {
     _channels : any[];
@@ -18,7 +17,7 @@ export class BeefApiService {
     currentUser: User;
 
 
-    private apiUrl = 'http://b33f.io/api/public';  // URL to web API
+    private apiUrl = 'https://b33f.io/api/public';  // URL to web API
 
     constructor(private http : Http) {
         //this.loadMockData();
@@ -132,15 +131,20 @@ export class BeefApiService {
     }
 
     /* for now just return true if valid user */
-    public login(loginCredentials:LoginCredentials):boolean{
-        for (let user of this._users) {
-            if ((user.email === loginCredentials.email) && (user.password === loginCredentials.password)){
-                this.currentUser = user;
-                return true;
-            }
+    public login(loginCredentials:LoginCredentials):Promise<any>{
+        let req = {
+            "username": loginCredentials.username,
+            "password": loginCredentials.password,
         }
-        return false;
-        //TODO: return promise
+        return this.http
+			.post(`${this.apiUrl}/login`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
+    }
+
+    public setCurrentUser(user:User){
+        this.currentUser = user;
     }
 
 
@@ -154,7 +158,7 @@ export class BeefApiService {
             "phone_number": user.phone
         }
         return this.http
-			.post("http://b33f.io/api/public/register", req)
+			.post(`${this.apiUrl}/register`, req)
             .toPromise()
 			.then(x => x)
 			.catch(x => x.message);
