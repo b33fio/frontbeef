@@ -7,6 +7,7 @@ import { Channel } from './classes/channel';
 import { LoginCredentials } from './classes/login-credentials';
 import 'rxjs/add/operator/toPromise';
 import { Http, Headers, Response } from '@angular/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class BeefApiService {
@@ -18,10 +19,15 @@ export class BeefApiService {
     jwt:string;
 
 
-    private apiUrl = 'https://b33f.io/api/public';  // URL to web API
+    private apiUrl;
 
+    
     constructor(private http : Http) {
-        //this.loadMockData();
+        if(environment.production){
+            this.apiUrl = '/api/public';
+        } else {
+            this.apiUrl = 'https://b33f.io/api/public';
+        }
     }
 
     private loadMockData() {
