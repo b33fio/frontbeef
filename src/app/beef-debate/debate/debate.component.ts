@@ -13,7 +13,7 @@ import { Point } from '../../beef-api/classes/point';
 })
 
 export class DebateComponent implements OnInit {
-    debate : Debate[];
+    debate : any;
     points : Point[];
     rows : any[];
     pointText : string;
@@ -26,9 +26,16 @@ export class DebateComponent implements OnInit {
     }
 
     ngOnInit() {
+        // this seems janky, but it works
+        var __this = this;
         this.route.params.subscribe(
-            x => this.importModel(x['id']));
-        this.generateRows();
+            x => this.beefApi.getDebateById(x['id'])
+            .then(function(x) {
+                __this.debate = x['debate'];
+                __this.points = x['points'];
+                __this.generateRows();
+                console.log(__this.rows);
+            }));
 
         //TODO: get this from session
         this.postPermission = true;
@@ -41,11 +48,11 @@ export class DebateComponent implements OnInit {
     }
 
     submitPoint() {
-        // TODO: remove hard coded IDs
-        this.beefApi.addPoint(1, 1, this.pointText);
-        this.points = this.beefApi.getPointsByDebate(1);
-        this.generateRows();
-        this.postPermission = false;
+        // TODO: get this working with API
+        //this.beefApi.addPoint(1, 1, this.pointText);
+        //this.points = this.beefApi.getPointsByDebate(1);
+        //this.generateRows();
+        //this.postPermission = false;
     }
 
     generateRows() {
@@ -83,20 +90,20 @@ export class DebateComponent implements OnInit {
         if (this.points.length == 1) {
             rows.push({
                 "leftPoint": this.points[this.points.length-1],
-                "rightPoint": {"text_content": "Pending..."},
+                "rightPoint": {"point_text": "Pending..."},
                 "arrowDirection": arrowDirection
             });
         } else if(this.points.length % 2 != 0) {
             if (rowNumber % 2 != 0) {
                 rows.push({
-                    "leftPoint": {"text_content": "Pending..."},
+                    "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": this.points[this.points.length-1],
                     "arrowDirection": arrowDirection
                 });
             } else {
                 rows.push({
                     "leftPoint": this.points[this.points.length-1],
-                    "rightPoint": {"text_content": "Pending..."},
+                    "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": arrowDirection
                 });
             }
@@ -104,12 +111,12 @@ export class DebateComponent implements OnInit {
             if (rowNumber % 2 != 0) {
                 rows.push({
                     "leftPoint": null,
-                    "rightPoint": {"text_content": "Pending..."},
+                    "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": null
                 });
             } else {
                 rows.push({
-                    "leftPoint": {"text_content": "Pending..."},
+                    "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": null,
                     "arrowDirection": null
                 });

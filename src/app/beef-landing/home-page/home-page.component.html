@@ -1,6 +1,13 @@
 <div class="buttons">
   <h3>Welcome to Beef<span *ngIf="beefApiService.getUser()">, {{beefApiService.getUser().username}}</span></h3>
-  <button routerLink="signup" routerLinkActive="active" class='btn btn-info'>Sign Up</button>
-  <br>
-  <button routerLink="login" routerLinkActive="active" class='btn btn-success'>Login</button>
+  <div *ngIf="!this.beefApiService.getUser()">
+    <button routerLink="signup" routerLinkActive="active" class='btn btn-info'>Sign Up</button>
+    <br>
+    <button routerLink="login" routerLinkActive="active" class='btn btn-success'>Login</button>
+  </div>
+  <div *ngIf="this.beefApiService.getUser()">
+    <button routerLink="browse" routerLinkActive="active" class="btn btn-info btn-block">Start Exporing!</button>
+  </div>
+
+  
 </div>

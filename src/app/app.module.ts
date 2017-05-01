@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
+
 import { BeefBrowserModule } from './beef-browser/beef-browser.module'
 import { BeefLandingModule } from './beef-landing/beef-landing.module'
 import { BeefDebateModule } from './beef-debate/beef-debate.module'
@@ -20,6 +21,8 @@ import { LogoutComponent } from './beef-account/logout/logout.component';
 import { SignupComponent } from './beef-account/signup/signup.component';
 import { SettingsComponent } from './beef-account/settings/settings.component';
 import { BeefApiService } from './beef-api/beef-api.service';
+import { VerifyComponent } from './beef-account/verify/verify.component';
+import { VerifyMessageComponent } from './beef-account/verify-message/verify-message.component';
 
 const appRoutes: Routes = [
   //landing page, handles login/sign up
@@ -55,9 +58,11 @@ const appRoutes: Routes = [
   { path: 'login',
     component: LoginComponent
   },
-  //view account settings and edit
-  { path: 'logout',
-    component: LogoutComponent
+    { path: 'verify/:token',
+    component: VerifyComponent
+  },
+  { path: 'verify',
+    component: VerifyMessageComponent
   },
   //any other route gets redirected to a PageNotFound component
   { path: '**',
@@ -74,6 +79,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     BeefAccountModule,
     BeefBrowserModule,
     BeefDebateModule,

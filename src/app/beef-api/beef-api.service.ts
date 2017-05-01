@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-
 import { CHANNELS, DEBATES, POINTS, USERS } from './mock-beef';
 import { User } from './classes/user';
 import { Debate } from './classes/debate';
 import { Point } from './classes/point';
+import { Channel } from './classes/channel';
 import { LoginCredentials } from './classes/login-credentials';
+import 'rxjs/add/operator/toPromise';
+import { Http, Headers, Response } from '@angular/http';
 
 @Injectable()
 export class BeefApiService {
@@ -13,9 +15,13 @@ export class BeefApiService {
     _points : any[];
     _users : any[];
     currentUser: User;
+    jwt:string;
 
-    constructor() {
-        this.loadMockData();
+
+    private apiUrl = 'https://b33f.io/api/public';  // URL to web API
+
+    constructor(private http : Http) {
+        //this.loadMockData();
     }
 
     private loadMockData() {
@@ -25,29 +31,58 @@ export class BeefApiService {
         this._users = USERS;
     }
 
-    public getChannels() {
-        return this._channels;
+    public getChannels() : Promise<any> {
+        //return this._channels;
+        return this.http.get(`${this.apiUrl}/channels`).toPromise()
+            .then(x => x).catch(x => x.message);
     }
 
     public addChannel(channelName : string ) {
+        // TODO: add api here
         this._channels.push({
                 "channel_name": channelName,
                 "channel_id": this._channels.length
         });
     }
 
-    public getDebates() {
-        return this._debates;
+    public getDebates() : Promise<any> {
+        //return this._debates;
+        return this.http.get(`${this.apiUrl}/debates`).toPromise()
+        .then(function(x) {
+            return x;
+        }).catch(x => x.message);
+
     }
 
-    public getDebatesByChannelName(channelName : string) {
-        return this._debates.filter(
-            debate => debate.channel_name == channelName);
+    public getDebatesByChannelName(channelName : string) : Promise<Debate[]>{
+        //return this._debates.filter(
+        //    debate => debate.channel_name == channelName);
+        return this.http.get(`${this.apiUrl}/debates/channel/${channelName}`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json() as Debate[];
+        }).catch(x => x.message);
     }
 
-    public getDebateById(debateId : number) {
-        return this._debates.find(
-            debate => debate.debate_id == debateId);
+    public getDebatesByChannelID(channelID : number) : Promise<Debate[]>{
+        return this.http.get(`${this.apiUrl}/debates/channel/${channelID}`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json() as Debate[];
+        }).catch(x => x.message);
+    }
+
+
+    public getDebateById(debateID : number) : Promise<any> {
+        return this.http.get(`${this.apiUrl}/debates/${debateID}`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json();
+        }).catch(x => x.message);
+
     }
 
     public addDebate(debateTitle: string, proponentId: number,
@@ -88,31 +123,44 @@ export class BeefApiService {
         return this._points;
     }
 
-    public addPoint(debateId : number, userId : number,
-             pointText : string) {
-        var _newId = this._points.length;
-        this._points.push(
-            new Point(_newId, debateId, userId, 10,11, pointText)
-        );
+    public postPoint(debateId : number, pointText : string):Promise<any> {
+        let req = {
+            debate_id: debateId,
+            point_text: pointText,
+            jwt:this.jwt
+        };
+        return this.http
+			.post(`${this.apiUrl}/points`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 
     /* for now just return true if valid user */
-    public login(loginCredentials:LoginCredentials):boolean{
-        for (let user of this._users) {
-            if ((user.email === loginCredentials.email) && (user.password === loginCredentials.password)){
-                this.currentUser = user;
-                return true;
-            }
+    public login(loginCredentials:LoginCredentials):Promise<any>{
+        let req = {
+            "username": loginCredentials.username,
+            "password": loginCredentials.password,
         }
-        return false;
-        //TODO: return promise
+        return this.http
+			.post(`${this.apiUrl}/login`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 
-
-    public register(user:User):boolean{
-        user.id = Math.max.apply(Math,this._users.map(x => x.id)) + 1;
-        this._users.push(user);
-        return true;
+    public setCurrentUser(user:User){
+        this.currentUser = user;
+    }
+    public setJwt(jwt){
+        this.jwt = jwt;
+    }
+    public register(data):Promise<any>{
+        return this.http
+			.post(`${this.apiUrl}/register`, data)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
         
         //TODO: include mock logic to check for existing users
         //TODO: return promise
@@ -123,13 +171,30 @@ export class BeefApiService {
         return this.currentUser;
     }
 
+    public getUsers() : Promise<any[]> {
+        return this.http.get(`${this.apiUrl}/users`)
+        .toPromise()
+        .then(function(x) {
+            console.log(x.json());
+            return x.json();
+        }).catch(x => x.message);
+    }
+
     public logout():boolean{
         this.currentUser = undefined;
+        this.jwt = undefined;
         return true;
     }
     public getMyDebates():Debate[]{
         return this._debates.filter(
             debate => debate.proponent_id==this.currentUser.id || 
             debate.opponent_id==this.currentUser.id);
+    }
+    public verifyToken(token):Promise<any>{
+        return this.http
+			.get(`${this.apiUrl}/token/`+ token)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 }

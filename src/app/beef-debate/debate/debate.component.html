@@ -1,5 +1,5 @@
-<div class="container">
-    <h1>{{ this.debate.debate_title }} </h1>
+<div *ngIf="debate" class="container">
+    <h1>{{ this.debate.debate_name }} </h1>
 
     <div class="row">
         <div class="col-md-5">
@@ -7,14 +7,17 @@
         </div>
 
         <div class="col-md-5 col-md-offset-2">
-            <h3> {{ this.debate.opponent_username }} </h3>
+            <h3> {{ this.debate.opponent_username || "Waiting for Opponent"}} </h3>
         </div>
     </div>
 
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.leftPoint">
-                {{ row.leftPoint.text_content }}
+                <span> {{ row.leftPoint.point_text }}</span> 
+                <br>
+                <small class="pull-right pull-down">{{ row.leftPoint.point_created }} </small>
+
             </div>
         </div>
         <div class="col-md-2">
@@ -26,7 +29,9 @@
         </div>
         <div class="col-md-5">
             <div class="well point_container" *ngIf="row.rightPoint">
-                {{ row.rightPoint.text_content }}
+                <span> {{ row.rightPoint.point_text }} </span>
+                <br>
+                <small class="pull-right pull-down">{{ row.rightPoint.point_created }} </small>
             </div>
         </div>
     </div>
@@ -35,7 +40,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="pointTextForm">Your point:</label>
+                <label for="pointTextForm">New Point:</label>
                 <textarea id="pointTextForm" class="form-control"
                     rows="3" [(ngModel)]="pointText"></textarea>
             </div>

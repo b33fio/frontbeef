@@ -11,13 +11,26 @@ import { Channel } from '../../beef-api/classes/channel';
   styleUrls: ['./global-browser.component.css']
 })
 export class GlobalBrowserComponent implements OnInit {
-    channels : Channel[];
+    channels : any[];
+    error:string;
 
     constructor(private beefApi : BeefApiService) {
-        this.channels = beefApi.getChannels();
-        console.log(this.channels);
+
     }
 
     ngOnInit() {
+        this.beefApi.getChannels().then(res => {
+            try{
+                res.json();
+            } catch (e){
+                this.error = "Server Delivered Invalid Response";
+                return;
+            }
+            if(res.status===200){
+                this.channels = res.json().channels;
+            } else {
+                this.error = "Server Delivered Invalid Response";
+            }
+        });
     }
 }

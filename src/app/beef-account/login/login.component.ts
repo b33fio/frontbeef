@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginCredentials } from "../../beef-api/classes/login-credentials";
 import { BeefApiService } from '../../beef-api/beef-api.service';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../../beef-api/classes/user';
 
 @Component({
   selector: 'app-login',
@@ -16,17 +17,29 @@ export class LoginComponent implements OnInit {
   
   model = new LoginCredentials();
   submitted = false;
+  message;
 
   onSubmit() { 
     this.submitted = true; 
-    let success = this.beefApiService.login(this.model);
-    if(success){
-      this.router.navigate([""]);
-    } else {
-      this.submitted = false; 
-      alert("invalid login, HANDLE ME!");
-    }
-
+    this.beefApiService.login(this.model).then((res)=>{
+      try{
+        res.json();
+      } catch (e){
+        this.submitted = false; 
+        this.message = "Server Error, Try again!";
+        return;
+      }
+      if(res.status===200 && res.json().successful){
+        let user:User = new User();
+        user.username = this.model.username;
+        this.beefApiService.setCurrentUser(user);
+        this.beefApiService.setJwt(res.json().jwt);
+        this.router.navigate([""]);
+      } else {
+        this.submitted = false; 
+        this.message = "Server responded with: " + res.json().error;
+      }
+    });
 
     //TODO: Call the api service to send the data
     //confirm success to user

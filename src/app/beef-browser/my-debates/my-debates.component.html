@@ -1,11 +1,10 @@
 <div class="container">
 	<h1>My Debates</h1>
-	<ul class="list-group">
+	<div *ngIf="message">{{message}}</div>
+	<ul *ngIf="!message" class="list-group">
 	  <li class="list-group-item" *ngFor="let debate of debates">
-          <span class="badge">{{ debate.points.length }}</span>
-          <a routerLink="{{ debate.debate_url }}">
-              {{ debate.debate_title }}
-  		 </a>
+    	<!--<span class="badge">{{ debate.points.length }}</span>-->
+      <a (click)="goToDebate(debate.debate_id)">{{ debate.debate_name }}</a>
 	  </li>
 	</ul>
 </div>
