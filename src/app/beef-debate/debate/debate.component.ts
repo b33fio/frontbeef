@@ -18,6 +18,8 @@ export class DebateComponent implements OnInit {
     rows : any[];
     pointText : string;
     postPermission : boolean;
+    nextPoster : string;
+    showPostForm : boolean;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -26,19 +28,23 @@ export class DebateComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this seems janky, but it works
-        var __this = this;
         this.route.params.subscribe(
             x => this.beefApi.getDebateById(x['id'])
-            .then(function(x) {
-                __this.debate = x['debate'];
-                __this.points = x['points'];
-                __this.generateRows();
-                console.log(__this.rows);
-            }));
+            .then(x => {
+                this.debate = x['debate'];
+                this.points = x['points'];
+                this.generateRows();
+                this.showPostForm = false;
 
-        //TODO: get this from session
-        this.postPermission = true;
+                console.log(this.debate);
+
+                var user = this.beefApi.getUser();
+                console.log(user);
+                if (user) {
+                    if (user['username'] == this.nextPoster)
+                        this.showPostForm = true;
+                }
+            }));
     }
 
     importModel(id : number) {
@@ -93,6 +99,7 @@ export class DebateComponent implements OnInit {
                 "rightPoint": {"point_text": "Pending..."},
                 "arrowDirection": arrowDirection
             });
+            this.nextPoster = this.debate['opponent_username'];
         } else if(this.points.length % 2 != 0) {
             if (rowNumber % 2 != 0) {
                 rows.push({
@@ -100,12 +107,14 @@ export class DebateComponent implements OnInit {
                     "rightPoint": this.points[this.points.length-1],
                     "arrowDirection": arrowDirection
                 });
+                this.nextPoster = this.debate['proponent_username'];
             } else {
                 rows.push({
                     "leftPoint": this.points[this.points.length-1],
                     "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": arrowDirection
                 });
+                this.nextPoster = this.debate['opponent_username'];
             }
         } else {
             if (rowNumber % 2 != 0) {
@@ -114,12 +123,14 @@ export class DebateComponent implements OnInit {
                     "rightPoint": {"point_text": "Pending..."},
                     "arrowDirection": null
                 });
+                this.nextPoster = this.debate['opponent_username'];
             } else {
                 rows.push({
                     "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": null,
                     "arrowDirection": null
                 });
+                this.nextPoster = this.debate['proponent_username'];
             }
         }
 

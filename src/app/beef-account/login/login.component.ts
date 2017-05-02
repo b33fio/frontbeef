@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       if(res.status===200 && res.json().successful){
         let user:User = new User();
         user.username = this.model.username;
+        user.id = res.json()['user_id'];
         this.beefApiService.setCurrentUser(user);
         this.beefApiService.setJwt(res.json().jwt);
         this.router.navigate([""]);
