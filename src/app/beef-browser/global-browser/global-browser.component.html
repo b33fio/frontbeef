@@ -1,12 +1,15 @@
 <div class="container">
-	<h1>Channels</h1>
+	<div>
+		<h1>Channels</h1>
+		<div class="pull-right">#Debates</div>
+	</div>
 	<div *ngIf="!channels" class="well">
   	Loading...<i class="fa fa-spinner fa-spin"></i>
 	</div>
 	<div *ngIf="error" class='alert alert-danger'>{{error}}</div>
 	<ul *ngIf="!error" class="list-group">
 	  <li class="list-group-item" *ngFor="let channel of channels">
-          <span class="badge">{{ channel.num_debates }}</span>
+          <span class="badge">{{ channel.debate_count || 0 }}</span>
 		 <a routerLink="/browse/{{ channel.channel_name }}">
              {{ channel.channel_name }}
   		 </a>

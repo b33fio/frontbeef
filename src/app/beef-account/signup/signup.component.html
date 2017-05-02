@@ -1,28 +1,26 @@
-<div class="container">
-    <h1>Registration Form</h1>
-    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
-      </div>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" required [(ngModel)]="model.username" name="username">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password">
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" required [(ngModel)]="model.phone" name="phone">
-      </div>
-      <div *ngIf="message" class="alert alert-danger">{{message}}</div>
-      <button [disabled]="submitted || !signupForm.form.valid" type="submit" class="btn btn-success">Submit</button>
-    </form>
-</div>
+<h3>Register</h3>
+<form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+  <div class="input-group margin">
+    <span class="input-group-addon" id="sizing-addon2">Name</span>
+    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="name" required [(ngModel)]="model.name" name="name">
+  </div>
+  <div class="input-group margin">
+    <span class="input-group-addon" id="sizing-addon2">Email</span>
+    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="email" required [(ngModel)]="model.email" name="email">
+  </div>
+  <div class="input-group margin">
+    <span class="input-group-addon" id="sizing-addon2">Username</span>
+    <input type="text" class="form-control" placeholder="3+ Character Username" minlength="3" regex="^[a-zA-Z0-9_]*$" aria-describedby="sizing-addon2" id="username" required [(ngModel)]="model.username" name="username">
+  </div>
+  <div class="input-group margin">
+    <span class="input-group-addon" id="sizing-addon2">Password</span>
+    <input type="password" placeholder="8+ Character Password" class="form-control" aria-describedby="sizing-addon2" id="password" minlength="8" required [(ngModel)]="model.password" name="password">
+  </div>
+  <div class="input-group margin">
+    <span class="input-group-addon" id="sizing-addon2">Phone</span>
+    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="phone" required [(ngModel)]="model.phone" name="phone">
+  </div>
+  <div *ngIf="message" class="alert alert-danger">{{message}}</div>
+  <button [disabled]="submitted || !signupForm.form.valid" type="submit" class="btn btn-success">Submit</button>
+</form>
 

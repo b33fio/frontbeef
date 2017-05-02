@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
 
     this.beefApiService.register(req).then((res)=>{
       if(res.status==200){
-        this.router.navigate([""]);
+        this.router.navigate(["verify-message"]);
       } else {
         this.submitted = false; 
         this.message = "Server responded with: " + res.json().error;

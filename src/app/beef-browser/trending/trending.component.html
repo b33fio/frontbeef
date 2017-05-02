@@ -1,0 +1,8 @@
+<h4>Trending</h4>
+<div *ngIf="message">{{message}}</div>
+<ul *ngIf="!message" class="list-group">
+  <li class="list-group-item" *ngFor="let debate of debates">
+    <span class="badge">{{ debate.point_count || 0 }}</span>
+    <a (click)="goToDebate(debate.debate_id)">{{ debate.debate_name }}</a>
+  </li>
+</ul>

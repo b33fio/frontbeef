@@ -7,14 +7,15 @@ import { ChannelBrowserComponent } from './channel-browser/channel-browser.compo
 import { MyDebatesComponent } from './my-debates/my-debates.component';
 
 import { BeefApiService } from '../beef-api/beef-api.service';
+import { TrendingComponent } from './trending/trending.component';
 
 @NgModule({
   imports: [
       CommonModule,
       RouterModule
   ],
-  declarations: [GlobalBrowserComponent, ChannelBrowserComponent, MyDebatesComponent],
-  exports: [GlobalBrowserComponent, ChannelBrowserComponent],
+  declarations: [GlobalBrowserComponent, ChannelBrowserComponent, MyDebatesComponent, TrendingComponent],
+  exports: [GlobalBrowserComponent, ChannelBrowserComponent,TrendingComponent],
   providers: [BeefApiService],
 })
 export class BeefBrowserModule { }
