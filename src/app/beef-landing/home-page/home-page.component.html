@@ -1,4 +1,4 @@
-<div class="buttons">
+<!--<div class="buttons">
   <h3>Welcome to Beef<span *ngIf="beefApiService.getUser()">, {{beefApiService.getUser().username}}</span></h3>
   <div *ngIf="!beefApiService.getUser()">
     <button routerLink="signup" routerLinkActive="active" class='btn btn-info'>Sign Up</button>
@@ -8,6 +8,21 @@
   <div *ngIf="this.beefApiService.getUser()">
     <button routerLink="browse" routerLinkActive="active" class="btn btn-info btn-block">Start Exporing!</button>
   </div>
-
-  
+</div>-->
+<div class="container">
+  <div *ngIf="!beefApiService.getUser()" class="row">
+    <div class="col-md-8">
+      <app-trending></app-trending>
+    </div>
+    <div class="col-md-4">
+      <app-login></app-login>
+      <app-signup></app-signup>
+    </div>
+  </div>
+  <div *ngIf="beefApiService.getUser()" class="row">
+    <div class="col-md-12">
+      <h2>Welcome, {{beefApiService.getUser().username}}</h2>
+      <app-trending></app-trending>
+    </div>
+  </div>
 </div>

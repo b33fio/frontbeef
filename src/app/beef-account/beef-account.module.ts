@@ -12,6 +12,8 @@ import { VerifyMessageComponent } from './verify-message/verify-message.componen
   imports: [
     CommonModule,FormsModule
   ],
-  declarations: [LoginComponent, SettingsComponent, LogoutComponent, SignupComponent, VerifyComponent, VerifyMessageComponent]
+  declarations: [LoginComponent, SettingsComponent, LogoutComponent, SignupComponent, VerifyComponent, VerifyMessageComponent],
+  exports: [LoginComponent, SettingsComponent, LogoutComponent, SignupComponent, VerifyComponent, VerifyMessageComponent]
+
 })
 export class BeefAccountModule { }

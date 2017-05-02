@@ -8,6 +8,7 @@ import { LoginCredentials } from './classes/login-credentials';
 import 'rxjs/add/operator/toPromise';
 import { Http, Headers, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class BeefApiService {
@@ -22,7 +23,7 @@ export class BeefApiService {
     private apiUrl;
 
     
-    constructor(private http : Http) {
+    constructor(private http : Http,private router: Router,private route: ActivatedRoute) {
         if(environment.production){
             this.apiUrl = '/api/public';
         } else {
@@ -189,6 +190,7 @@ export class BeefApiService {
     public logout():boolean{
         this.currentUser = undefined;
         this.jwt = undefined;
+        this.router.navigateByUrl("");
         return true;
     }
     public getMyDebates():Debate[]{
