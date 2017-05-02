@@ -40,6 +40,8 @@ export class DebateComponent implements OnInit {
                     if (user['username'] == this.nextPoster)
                         this.showPostForm = true;
                 }
+
+                console.log(this.rows);
             }));
     }
 
@@ -74,7 +76,7 @@ export class DebateComponent implements OnInit {
         // used to determine "snaking" of points
         var rowNumber = 0;
 
-        var arrowDirection = "right";
+        var pointShifted = "right";
 
         // Collect points into rows
         for (var i = 0; i < this.points.length-1; i += 2, rowNumber += 1) {
@@ -83,20 +85,20 @@ export class DebateComponent implements OnInit {
                 rows.push({
                     "leftPoint": this.points[i],
                     "rightPoint": this.points[i+1],
-                    "arrowDirection": arrowDirection
+                    "pointShifted": pointShifted
                 });
             } else {
                 rows.push({
                     "leftPoint": this.points[i+1],
                     "rightPoint": this.points[i],
-                    "arrowDirection": arrowDirection
+                    "pointShifted": pointShifted
                 });
             }
 
-            if (arrowDirection == "left")
-                arrowDirection = "right";
+            if (pointShifted == "left")
+                pointShifted = "right";
             else
-                arrowDirection = "left";
+                pointShifted = "left";
         }
 
         // Add pending point
@@ -104,7 +106,7 @@ export class DebateComponent implements OnInit {
             rows.push({
                 "leftPoint": this.points[this.points.length-1],
                 "rightPoint": {"point_text": "Pending..."},
-                "arrowDirection": arrowDirection
+                "pointShifted": pointShifted
             });
             this.nextPoster = this.debate['opponent_username'];
         } else if(this.points.length % 2 != 0) {
@@ -112,14 +114,14 @@ export class DebateComponent implements OnInit {
                 rows.push({
                     "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": this.points[this.points.length-1],
-                    "arrowDirection": arrowDirection
+                    "pointShifted": pointShifted
                 });
                 this.nextPoster = this.debate['proponent_username'];
             } else {
                 rows.push({
                     "leftPoint": this.points[this.points.length-1],
                     "rightPoint": {"point_text": "Pending..."},
-                    "arrowDirection": arrowDirection
+                    "pointShifted": pointShifted
                 });
                 this.nextPoster = this.debate['opponent_username'];
             }
@@ -128,14 +130,14 @@ export class DebateComponent implements OnInit {
                 rows.push({
                     "leftPoint": null,
                     "rightPoint": {"point_text": "Pending..."},
-                    "arrowDirection": null
+                    "pointShifted": null
                 });
                 this.nextPoster = this.debate['opponent_username'];
             } else {
                 rows.push({
                     "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": null,
-                    "arrowDirection": null
+                    "pointShifted": null
                 });
                 this.nextPoster = this.debate['proponent_username'];
             }
