@@ -17,7 +17,6 @@ export class DebateComponent implements OnInit {
     points : Point[];
     rows : any[];
     pointText : string;
-    postPermission : boolean;
     nextPoster : string;
     showPostForm : boolean;
 
@@ -36,10 +35,7 @@ export class DebateComponent implements OnInit {
                 this.generateRows();
                 this.showPostForm = false;
 
-                console.log(this.debate);
-
                 var user = this.beefApi.getUser();
-                console.log(user);
                 if (user) {
                     if (user['username'] == this.nextPoster)
                         this.showPostForm = true;
@@ -54,11 +50,22 @@ export class DebateComponent implements OnInit {
     }
 
     submitPoint() {
-        // TODO: get this working with API
-        //this.beefApi.addPoint(1, 1, this.pointText);
-        //this.points = this.beefApi.getPointsByDebate(1);
-        //this.generateRows();
-        //this.postPermission = false;
+        this.beefApi.postPoint(this.debate['debate_id'], this.pointText)
+            .then(x => {
+                this.beefApi.getDebateById(this.debate['debate_id'])
+                    .then(x => {
+                        this.debate = x['debate'];
+                        this.points = x['points'];
+                        this.generateRows();
+                        this.showPostForm = false;
+
+                        var user = this.beefApi.getUser();
+                        if (user) {
+                            if (user['username'] == this.nextPoster)
+                                this.showPostForm = true;
+                        }
+                    });
+            });
     }
 
     generateRows() {

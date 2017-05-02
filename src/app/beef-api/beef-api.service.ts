@@ -136,8 +136,9 @@ export class BeefApiService {
             point_text: pointText,
             jwt:this.jwt
         };
+        console.log(req);
         return this.http
-			.post(`${this.apiUrl}/points`, req)
+			.post(`${this.apiUrl}/point`, req)
             .toPromise()
 			.then(x => x)
 			.catch(x => x.message);
