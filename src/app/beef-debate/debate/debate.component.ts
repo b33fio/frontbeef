@@ -19,6 +19,7 @@ export class DebateComponent implements OnInit {
     pointText : string;
     nextPoster : string;
     showPostForm : boolean;
+    refreshId : any;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -29,45 +30,48 @@ export class DebateComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(
             x => this.beefApi.getDebateById(x['id'])
-            .then(x => {
-                this.debate = x['debate'];
-                this.points = x['points'];
-                this.generateRows();
-                this.showPostForm = false;
-
-                var user = this.beefApi.getUser();
-                if (user) {
-                    if (user['username'] == this.nextPoster)
-                        this.showPostForm = true;
-                }
-
-                console.log(this.rows);
-            }));
+            .then(x => { this.updateModel(x) }));
+        this.refreshId = this.listenForNewPoints(3000);
     }
 
-    importModel(id : number) {
-        this.debate = this.beefApi.getDebateById(id);
-        this.points = this.beefApi.getPointsByDebate(id);
+    ngOnDestroy() {
+        clearInterval(this.refreshId);
+    }
 
+    updateModel(x) {
+        this.debate = x['debate'];
+        this.points = x['points'];
+        this.generateRows();
+        this.showPostForm = false;
+
+        var user = this.beefApi.getUser();
+        if (user) {
+            if (user['username'] == this.nextPoster)
+                this.showPostForm = true;
+        }
+    }
+
+    listenForNewPoints(interval : number) {
+        return setInterval(x => {
+            console.log('Listening for new posts...');
+            this.beefApi.getDebateById(this.debate['debate_id'])
+                .then(x => { this.updateModel(x); });
+        }, interval);
     }
 
     submitPoint() {
         this.beefApi.postPoint(this.debate['debate_id'], this.pointText)
             .then(x => {
                 this.beefApi.getDebateById(this.debate['debate_id'])
-                    .then(x => {
-                        this.debate = x['debate'];
-                        this.points = x['points'];
-                        this.generateRows();
-                        this.showPostForm = false;
-
-                        var user = this.beefApi.getUser();
-                        if (user) {
-                            if (user['username'] == this.nextPoster)
-                                this.showPostForm = true;
-                        }
-                    });
+                    .then(x => { this.updateModel(x); });
             });
+    }
+
+    joinDebate() {
+        this.beefApi.joinDebate(this.debate['debate_id']).then(x => {
+            this.beefApi.getDebateById(this.debate['debate_id'])
+                .then(x => { this.updateModel(x); });
+        });
     }
 
     generateRows() {
@@ -145,4 +149,5 @@ export class DebateComponent implements OnInit {
 
         this.rows = rows;
     }
+
 }

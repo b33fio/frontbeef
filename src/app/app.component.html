@@ -1,26 +1,24 @@
-
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" routerLink="/" routerLinkActive="active">b33f.io</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-          <li><a routerLink="/browse" routerLinkActive="active">Browse Channels</a></li>
-          <li><a routerLink="/mydebates" routerLinkActive="active">My Debates</a></li>
-        </ul>
-        
-        <ul *ngIf="beefApiService.getUser()" class="nav navbar-nav navbar-right">
-          <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
-          <li><a (click)="beefApiService.logout()">Logout</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <div class="outlet">
-    <router-outlet></router-outlet>
-  </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/" routerLinkActive="active">b33f.io</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/browse" routerLinkActive="active">Browse Channels</a></li>
+        <li><a routerLink="/mydebates" routerLinkActive="active">My Debates</a></li>
+        <li><a routerLink="/debate/new" routerLinkActive="active">Create Debate</a></li>
+      </ul>
+      <ul *ngIf="beefApiService.getUser()" class="nav navbar-nav navbar-right">
+        <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
+        <li><a (click)="beefApiService.logout()">Logout</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="outlet">
+  <router-outlet></router-outlet>
+</div>
