@@ -29,7 +29,6 @@ export class CreateDebateComponent implements OnInit {
             this.channels = x.json()['channels'];
         });
         this.loggedIn = !!this.beefApi.getUser();
-        console.log(this.loggedIn);
     }
 
     onSubmit() {

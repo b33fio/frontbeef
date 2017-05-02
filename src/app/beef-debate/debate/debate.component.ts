@@ -40,8 +40,6 @@ export class DebateComponent implements OnInit {
                     if (user['username'] == this.nextPoster)
                         this.showPostForm = true;
                 }
-
-                console.log(this.rows);
             }));
     }
 
