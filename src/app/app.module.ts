@@ -15,7 +15,8 @@ import { GlobalBrowserComponent } from './beef-browser/global-browser/global-bro
 import { ChannelBrowserComponent } from './beef-browser/channel-browser/channel-browser.component';
 import { MyDebatesComponent } from './beef-browser/my-debates/my-debates.component';
 import { BeefNotFoundComponent } from './beef-utilities/beef-not-found/beef-not-found.component';
-import { DebateComponent } from './beef-debate/debate/debate.component'
+import { DebateComponent } from './beef-debate/debate/debate.component';
+import { CreateDebateComponent } from './beef-debate/create-debate/create-debate.component';
 import { LoginComponent } from './beef-account/login/login.component';
 import { LogoutComponent } from './beef-account/logout/logout.component';
 import { SignupComponent } from './beef-account/signup/signup.component';
@@ -41,6 +42,10 @@ const appRoutes: Routes = [
   //browse debates within a given (pre-defined channels)
   { path: 'mydebates',
     component: MyDebatesComponent
+  },
+  // create new debate
+  { path: 'debate/new',
+      component: CreateDebateComponent
   },
   //look at a debate (open/in-progres/closed as spectator/participant/public)
   { path: 'debate/:id',

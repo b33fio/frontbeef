@@ -11,6 +11,7 @@
         <li><a routerLink="/" routerLinkActive="active">Home</a></li>
         <li><a routerLink="/browse" routerLinkActive="active">Browse Channels</a></li>
         <li><a routerLink="/mydebates" routerLinkActive="active">My Debates</a></li>
+        <li><a routerLink="/debate/new" routerLinkActive="active">Create Debate</a></li>
       </ul>
       
       <ul *ngIf="beefApiService.getUser()" class="nav navbar-nav navbar-right">

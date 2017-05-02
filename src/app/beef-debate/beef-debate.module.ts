@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DebateComponent } from './debate/debate.component';
 import { BeefApiService } from '../beef-api/beef-api.service';
 import { PointComponent } from './point/point.component';
+import { CreateDebateComponent } from './create-debate/create-debate.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { PointComponent } from './point/point.component';
       RouterModule,
       FormsModule
   ],
-  declarations: [DebateComponent, PointComponent],
+  declarations: [DebateComponent, PointComponent, CreateDebateComponent],
   exports: [DebateComponent, PointComponent],
   providers: [BeefApiService]
 })

@@ -92,29 +92,18 @@ export class BeefApiService {
 
     }
 
-    public addDebate(debateTitle: string, proponentId: number,
-              channelId : number, channelName : string) {
-        var debateUrl = "/debates/" + channelId;
-        var createDate = new Date();
-        var updateDate = createDate;
-        var views = 1;
-        var upVotes = 0;
-        var downVotes = upVotes;
-
-        this._debates.push({
-            "debate_id": this._debates.length,
-            "debate_title": debateTitle,
-            "debate_url": debateUrl,
-            "proponent_id": proponentId,
-            "opponent_id": null,
-            "channel_id": channelId,
-            "channel_name": channelName,
-            "create_date": createDate,
-            "update_date": updateDate,
-            "views": views,
-            "up_votes": upVotes,
-            "down_votes": downVotes
-        });
+    public createDebate(debateTitle: string, channelId : string) {
+        let req = {
+            debate_name: debateTitle,
+            debate_channel: channelId,
+            jwt:this.jwt
+        };
+        console.log(req);
+        return this.http
+			.post(`${this.apiUrl}/debate`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
     }
 
     public getPoints() {
