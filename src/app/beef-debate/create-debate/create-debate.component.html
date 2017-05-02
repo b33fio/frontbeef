@@ -1,32 +1,37 @@
 <div class="container">
     <div class="row">
         <h1>Create new debate</h1>
-        <form (ngSubmit)="onSubmit()" #debateForm="ngForm">
-            <div class="form-group">
-                <label for="channel-select">Channel</label>
-                <select id="channel-select"
-                        name="channel-select"
-                        class="form-control"
-                        [(ngModel)]="channel"
-                        required >
-                    <option *ngFor="let channel of channels"
-                            value="{{channel.channel_id }}">
-                        {{ channel.channel_name }}
-                    </option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="debate-title">Title</label>
-                <textarea id="debate-title"
-                          name="debate-title"
-                          class="form-control"
-                          required
-                          rows="3" [(ngModel)]="title">
-                </textarea>
-            </div>
-            <button type="submit"
-                    [disabled]="submitted || !debateForm.form.valid"
-                    class="btn btn-default">Submit</button>
-        </form>
+        <div *ngIf="this.loggedIn">
+            <form (ngSubmit)="onSubmit()" #debateForm="ngForm">
+                <div class="form-group">
+                    <label for="channel-select">Channel</label>
+                    <select id="channel-select"
+                            name="channel-select"
+                            class="form-control"
+                            [(ngModel)]="channel"
+                            required >
+                        <option *ngFor="let channel of channels"
+                                value="{{channel.channel_id }}">
+                            {{ channel.channel_name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="debate-title">Title</label>
+                    <textarea id="debate-title"
+                              name="debate-title"
+                              class="form-control"
+                              required
+                              rows="3" [(ngModel)]="title">
+                    </textarea>
+                </div>
+                <button type="submit"
+                        [disabled]="submitted || !debateForm.form.valid"
+                        class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="!this.loggedIn">
+            You must be logged in to create a debate.
+        </div>
     </div>
 </div>

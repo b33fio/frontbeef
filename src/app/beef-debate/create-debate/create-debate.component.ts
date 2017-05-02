@@ -12,6 +12,7 @@ export class CreateDebateComponent implements OnInit {
     channels: any[];
     title : string;
     channel : string;
+    loggedIn = false;
 
     submitted = false;
     message;
@@ -26,8 +27,9 @@ export class CreateDebateComponent implements OnInit {
     ngOnInit() {
         this.beefApi.getChannels().then(x => {
             this.channels = x.json()['channels'];
-            console.log(this.channels);
         });
+        this.loggedIn = !!this.beefApi.getUser();
+        console.log(this.loggedIn);
     }
 
     onSubmit() {
