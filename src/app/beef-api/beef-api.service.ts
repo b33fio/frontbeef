@@ -106,6 +106,20 @@ export class BeefApiService {
 			.catch(x => x.message);
     }
 
+    public joinDebate(debateId: string) : Promise<any> {
+        let req = {
+            jwt:this.jwt
+        };
+        console.log(req);
+        return this.http
+            .post(`${this.apiUrl}/debate/join/${debateId}`, req)
+            .toPromise()
+			.then(x => x)
+			.catch(x => x.message);
+    }
+
+
+
     public getPoints() {
         return this._points;
     }

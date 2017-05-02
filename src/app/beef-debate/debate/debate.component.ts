@@ -143,4 +143,21 @@ export class DebateComponent implements OnInit {
 
         this.rows = rows;
     }
+
+    joinDebate() {
+        this.beefApi.joinDebate(this.debate['debate_id']).then(x => {
+            this.beefApi.getDebateById(this.debate['debate_id'])
+                .then(x => {
+                    this.debate = x['debate'];
+                    this.points = x['points'];
+                    this.generateRows();
+
+                    var user = this.beefApi.getUser();
+                    if (user) {
+                        if (user['username'] == this.nextPoster)
+                            this.showPostForm = true;
+                    }
+                });
+        });
+    }
 }
