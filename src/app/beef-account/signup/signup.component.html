@@ -1,12 +1,12 @@
-<h3>Register</h3>
+<h3>New User</h3>
 <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Name</span>
-    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="name" required [(ngModel)]="model.name" name="name">
+    <input type="text" class="form-control" placeholder="Your First Name" aria-describedby="sizing-addon2" id="name" required [(ngModel)]="model.name" name="name">
   </div>
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Email</span>
-    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="email" required [(ngModel)]="model.email" name="email">
+    <input type="text" class="form-control" placeholder="Email (for verification purposes)" aria-describedby="sizing-addon2" id="email" required [(ngModel)]="model.email" name="email">
   </div>
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Username</span>
@@ -16,11 +16,7 @@
     <span class="input-group-addon" id="sizing-addon2">Password</span>
     <input type="password" placeholder="8+ Character Password" class="form-control" aria-describedby="sizing-addon2" id="password" minlength="8" required [(ngModel)]="model.password" name="password">
   </div>
-  <div class="input-group margin">
-    <span class="input-group-addon" id="sizing-addon2">Phone</span>
-    <input type="text" class="form-control" aria-describedby="sizing-addon2" id="phone" required [(ngModel)]="model.phone" name="phone">
-  </div>
-  <div *ngIf="message" class="alert alert-danger">{{message}}</div>
-  <button [disabled]="submitted || !signupForm.form.valid" type="submit" class="btn btn-success">Submit</button>
+  <div *ngIf="message" class="alert alert-danger">Server responded with: {{message}}</div>
+  <button [disabled]="submitted || !signupForm.form.valid" type="submit" class="btn btn-info btn-block">Sign Up</button>
 </form>
 

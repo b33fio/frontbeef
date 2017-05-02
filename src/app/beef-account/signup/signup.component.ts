@@ -25,16 +25,24 @@ export class SignupComponent implements OnInit {
       password: this.model.password,
       password_check: this.model.password,
       email: this.model.email,
-      phone_number: +this.model.phone
+      phone_number: 12345
     };
 
     this.beefApiService.register(req).then((res)=>{
-      if(res.status==200){
-        this.router.navigate(["verify-message"]);
+      if(res.status==200&& res.json().successful){
+        this.router.navigate(["verify"]);
       } else {
         this.submitted = false; 
-        this.message = "Server responded with: " + res.json().error;
+        this.message = res.json().error;
       }
+    }).catch((err)=>{
+      this.submitted = false; 
+      try{
+        this.message = err.json().error;
+      }catch(e){
+        this.message = "Service Unavailable at this time";
+      }
+      
     });
 
     //TODO: Call the api service to send the data
