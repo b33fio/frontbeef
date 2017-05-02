@@ -19,6 +19,7 @@ export class DebateComponent implements OnInit {
     pointText : string;
     nextPoster : string;
     showPostForm : boolean;
+    refreshId : any;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -30,8 +31,11 @@ export class DebateComponent implements OnInit {
         this.route.params.subscribe(
             x => this.beefApi.getDebateById(x['id'])
             .then(x => { this.updateModel(x) }));
-        this.listenForNewPoints(3000);
-        console.log('hello');
+        this.refreshId = this.listenForNewPoints(3000);
+    }
+
+    ngOnDestroy() {
+        clearInterval(this.refreshId);
     }
 
     updateModel(x) {
@@ -48,7 +52,7 @@ export class DebateComponent implements OnInit {
     }
 
     listenForNewPoints(interval : number) {
-        setInterval(x => {
+        return setInterval(x => {
             console.log('Listening for new posts...');
             this.beefApi.getDebateById(this.debate['debate_id'])
                 .then(x => { this.updateModel(x); });
