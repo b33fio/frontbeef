@@ -4,7 +4,6 @@
     <div class="navbar-header">
       <a class="navbar-brand" routerLink="/" routerLinkActive="active">b33f.io</a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -13,7 +12,6 @@
         <li><a routerLink="/mydebates" routerLinkActive="active">My Debates</a></li>
         <li><a routerLink="/debate/new" routerLinkActive="active">Create Debate</a></li>
       </ul>
-      
       <ul *ngIf="beefApiService.getUser()" class="nav navbar-nav navbar-right">
         <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
         <li><a (click)="beefApiService.logout()">Logout</a></li>
@@ -21,4 +19,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<router-outlet></router-outlet>
+<div class="outlet">
+  <router-outlet></router-outlet>
+</div>

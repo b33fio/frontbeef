@@ -1,4 +1,4 @@
-<h3>Login</h3>
+<h3>Existing User?</h3>
 <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Username</span>
@@ -9,6 +9,6 @@
     <input type="password" class="form-control" aria-describedby="sizing-addon2" id="password" required [(ngModel)]="model.password" name="password">
   </div>
   <div *ngIf="message" class="alert alert-danger margin">{{message}}</div>
-  <button [disabled]="submitted || !loginForm.form.valid" type="submit" class="btn btn-success">Submit</button>
+  <button [disabled]="submitted || !loginForm.form.valid" type="submit" class="btn btn-info btn-block">Log In</button>
 </form>
 
