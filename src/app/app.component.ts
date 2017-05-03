@@ -15,6 +15,7 @@ export class AppComponent {
   ngOnInit() {
     //this.ngAfterViewChecked()
     this.user = this.beefApiService.getUser();
+      console.log(this.user);
   }
 
   ngAfterViewChecked() {

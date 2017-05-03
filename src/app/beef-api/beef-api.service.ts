@@ -22,7 +22,6 @@ export class BeefApiService {
 
     private apiUrl;
 
-    
     constructor(private http : Http,private router: Router,private route: ActivatedRoute) {
         if(environment.production){
             this.apiUrl = '/api/public';
@@ -177,9 +176,11 @@ export class BeefApiService {
 
     public setCurrentUser(user:User){
         this.currentUser = user;
+        sessionStorage.setItem('beef-username', user.username);
     }
     public setJwt(jwt){
         this.jwt = jwt;
+        sessionStorage.setItem('beef-jwt', jwt);
     }
     public register(data):Promise<any>{
         return this.http
@@ -194,7 +195,13 @@ export class BeefApiService {
     }
 
     public getUser():User{
-        return this.currentUser;
+        if (this.currentUser)
+            return this.currentUser;
+        if (sessionStorage.getItem('beef-username')) {
+            this.jwt = sessionStorage.getItem('beef-jwt');
+            return new User(sessionStorage.getItem('beef-username'));
+        }
+        return null;
     }
 
     public getUsers() : Promise<any[]> {
@@ -209,6 +216,8 @@ export class BeefApiService {
     public logout():boolean{
         this.currentUser = undefined;
         this.jwt = undefined;
+        sessionStorage.removeItem('beef-jwt');
+        sessionStorage.removeItem('beef-username');
         this.router.navigateByUrl("");
         return true;
     }
