@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BeefApiService } from '../../beef-api/beef-api.service';
-
+ import { $ } from 'jquery';
 @Component({
   selector: 'app-debate-carousel',
   templateUrl: './debate-carousel.component.html',
