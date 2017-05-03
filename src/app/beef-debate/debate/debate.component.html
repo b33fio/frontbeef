@@ -18,13 +18,15 @@
 
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-6">
-            <div class="well point_container"
+            <div class="point_container"
                  [ngClass]="{'point_shifted': row.pointShifted == 'left'}"
                 *ngIf="row.leftPoint">
-                <span> {{ row.leftPoint.point_text }}</span>
-                <br>
-                <small class="pull-right pull-down">{{ row.leftPoint.point_created }} </small>
-
+                <p>{{ row.leftPoint.point_type || '' }}</p>
+                <div class="well">
+                    <span> {{ row.leftPoint.point_text }}</span>
+                    <br>
+                    <small class="pull-right pull-down">{{ row.leftPoint.point_created }} </small>
+                </div>
             </div>
         </div>
         <!--
@@ -37,12 +39,15 @@
         </div>
         -->
         <div class="col-md-6">
-            <div class="well point_container"
+            <div class="point_container"
                  [ngClass]="{'point_shifted': row.pointShifted == 'right'}"
                 *ngIf="row.rightPoint">
-                <span> {{ row.rightPoint.point_text }} </span>
-                <br>
-                <small class="pull-right pull-down">{{ row.rightPoint.point_created }} </small>
+                <p>{{ row.rightPoint.point_type || '' }}</p>
+                <div class="well">
+                    <span> {{ row.rightPoint.point_text }} </span>
+                    <br>
+                    <small class="pull-right pull-down">{{ row.rightPoint.point_created }} </small>
+                </div>
             </div>
         </div>
     </div>
