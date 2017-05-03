@@ -20,6 +20,7 @@ export class DebateComponent implements OnInit {
     nextPoster : string;
     showPostForm : boolean;
     refreshId : any;
+    showJoinButton : boolean;
 
     constructor(private route : ActivatedRoute,
                 private router : Router,
@@ -49,6 +50,13 @@ export class DebateComponent implements OnInit {
             if (user['username'] == this.nextPoster)
                 this.showPostForm = true;
         }
+
+        this.showJoinButton = false;
+
+        console.log(this.debate);
+        if ((user && user['username'] != this.debate['proponent_username']) &&
+            this.debate['opponent_username'] == null)
+            this.showJoinButton = true;
     }
 
     listenForNewPoints(interval : number) {

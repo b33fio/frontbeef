@@ -1,6 +1,6 @@
 <div *ngIf="debate" class="container">
-    <h1>{{ this.debate.debate_name }} </h1>
-    <button *ngIf="!this.debate.opponent_id"
+    <h1>{{ this.debate.debate_name }} <small>({{this.debate.channel_name}})</small></h1>
+    <button *ngIf="this.showJoinButton"
         class="btn btn-primary"
         (click)="joinDebate()">
         Join debate
@@ -18,13 +18,15 @@
 
     <div class="row" *ngFor="let row of rows">
         <div class="col-md-6">
-            <div class="well point_container"
+            <div class="point_container"
                  [ngClass]="{'point_shifted': row.pointShifted == 'left'}"
                 *ngIf="row.leftPoint">
-                <span> {{ row.leftPoint.point_text }}</span>
-                <br>
-                <small class="pull-right pull-down .timestamp">{{ row.leftPoint.point_created }} </small>
-
+                <p>{{ row.leftPoint.point_type || '' }}</p>
+                <div class="well">
+                    <span> {{ row.leftPoint.point_text }}</span>
+                    <br>
+                    <small class="pull-right pull-down timestamp">{{ row.leftPoint.point_created }} </small>
+                </div>
             </div>
         </div>
         <!--
@@ -37,12 +39,16 @@
         </div>
         -->
         <div class="col-md-6">
-            <div class="well point_container"
+            <div class="point_container"
                  [ngClass]="{'point_shifted': row.pointShifted == 'right'}"
                 *ngIf="row.rightPoint">
-                <span> {{ row.rightPoint.point_text }} </span>
-                <br>
-                <small class="pull-right pull-down timestamp">{{ row.rightPoint.point_created }} </small>
+
+                <p>{{ row.rightPoint.point_type || '' }}</p>
+                <div class="well">
+                    <span> {{ row.rightPoint.point_text }} </span>
+                    <br>
+                    <small class="pull-right pull-down timestamp">{{ row.rightPoint.point_created }} </small>
+                </div>
             </div>
         </div>
     </div>
