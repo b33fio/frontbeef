@@ -58,8 +58,23 @@ export class BeefApiService {
         .then(function(x) {
             return x;
         }).catch(x => x.message);
-
     }
+
+    public getMyDebates() : Promise<any> {
+        let req = {
+            jwt:this.jwt
+        };
+
+        return this.http
+            .post(`${this.apiUrl}/user/debates`, req)
+            .toPromise()
+            .then(x => {
+                return x;
+            })
+			.catch(x => x.message);
+    }
+
+
 
     public getDebatesByChannelName(channelName : string) : Promise<Debate[]>{
         //return this._debates.filter(
@@ -197,11 +212,7 @@ export class BeefApiService {
         this.router.navigateByUrl("");
         return true;
     }
-    public getMyDebates():Debate[]{
-        return this._debates.filter(
-            debate => debate.proponent_id==this.currentUser.id || 
-            debate.opponent_id==this.currentUser.id);
-    }
+
     public verifyToken(token):Promise<any>{
         return this.http
 			.get(`${this.apiUrl}/token/`+ token)

@@ -16,7 +16,7 @@ export class MyDebatesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.beefApiService.getDebates().then( (res) => {
+        this.beefApiService.getMyDebates().then((res) => {
             try{
                 res.json();
             } catch (e){
@@ -27,7 +27,6 @@ export class MyDebatesComponent implements OnInit {
             } else {
                 this.message = 'Server responded with: "Unable to Fetch Your Debates';
             }
-            
         });
     }
     goToDebate(id){
