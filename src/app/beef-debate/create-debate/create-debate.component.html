@@ -32,7 +32,7 @@
         </div>
         <div *ngIf="message" class="alert alert-danger margin">{{message}}</div>
         <div *ngIf="!this.loggedIn">
-            You must be logged in to create a debate.
+            <a routerLink="/">Log In</a> or <a routerLink="/">Sign Up</a> to create a new debate!
         </div>
     </div>
 </div>
