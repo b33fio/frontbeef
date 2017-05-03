@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 import { Http, Headers, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Injectable()
 export class BeefApiService {
@@ -22,7 +23,7 @@ export class BeefApiService {
 
     private apiUrl;
 
-    constructor(private http : Http,private router: Router,private route: ActivatedRoute) {
+    constructor(private http : Http,private router: Router,private route: ActivatedRoute,private titleService: Title) {
         if(environment.production){
             this.apiUrl = '/api/public';
         } else {
@@ -228,5 +229,9 @@ export class BeefApiService {
             .toPromise()
 			.then(x => x)
 			.catch(x => x.message);
+    }
+
+    public setTitle( newTitle: string) {
+        this.titleService.setTitle( newTitle );
     }
 }

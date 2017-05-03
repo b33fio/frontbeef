@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BeefApiService } from '../../beef-api/beef-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-beef-not-found',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BeefNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(public beefApiService: BeefApiService,private router : Router) { }
 
   ngOnInit() {
+    this.beefApiService.setTitle("Beef Not Found");
+  }
+
+  goHome(){
+    this.router.navigate([""]);
   }
 
 }

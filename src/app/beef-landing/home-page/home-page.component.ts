@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.beefApiService.getUser();
+    this.beefApiService.setTitle("Home: Trending");
   }
 
   ngAfterViewChecked() {

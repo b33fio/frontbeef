@@ -15,20 +15,22 @@ export class GlobalBrowserComponent implements OnInit {
     error:string;
 
     constructor(private beefApi : BeefApiService) {
-
     }
 
     ngOnInit() {
+        this.beefApi.setTitle("Browse Channels");
         this.beefApi.getChannels().then(res => {
             try{
                 res.json();
             } catch (e){
+                this.beefApi.setTitle("Server Error");
                 this.error = "Server Delivered Invalid Response";
                 return;
             }
             if(res.status===200){
                 this.channels = res.json().channels;
             } else {
+                this.beefApi.setTitle("Server Error");
                 this.error = "Server Delivered Invalid Response";
             }
         });

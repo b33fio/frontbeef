@@ -1,8 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
-
 import { BeefBrowserModule } from './beef-browser/beef-browser.module'
 import { BeefLandingModule } from './beef-landing/beef-landing.module'
 import { BeefDebateModule } from './beef-debate/beef-debate.module'
@@ -91,7 +90,7 @@ const appRoutes: Routes = [
     BeefLandingModule,
     BeefUtilitiesModule
   ],
-  providers: [BeefApiService],
+  providers: [BeefApiService,Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
