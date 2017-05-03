@@ -30,6 +30,7 @@
                         class="btn btn-default">Submit</button>
             </form>
         </div>
+        <div *ngIf="message" class="alert alert-danger margin">{{message}}</div>
         <div *ngIf="!this.loggedIn">
             You must be logged in to create a debate.
         </div>

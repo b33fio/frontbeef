@@ -106,7 +106,7 @@ export class BeefApiService {
 
     }
 
-    public createDebate(debateTitle: string, channelId : string) {
+    public createDebate(debateTitle: string, channelId : string) : Promise<any> {
         let req = {
             debate_name: debateTitle,
             debate_channel: channelId,

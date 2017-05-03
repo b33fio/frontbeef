@@ -16,7 +16,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.beefApiService.getUser();
-      console.log(this.user);
   }
 
   ngAfterViewChecked() {
