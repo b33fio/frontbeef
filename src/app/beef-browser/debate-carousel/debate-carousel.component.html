@@ -4,7 +4,7 @@
   <div *ngFor="let debate of trimmedDebates; let first = first;" class="carousel-contents" [ngClass]="{ 'active': first, 'item': true }">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <h1><a (click)="goToDebate(debate.debate_id)">{{ debate.debate_name }}</a></h1>
+        <h1 class="bungee"><a (click)="goToDebate(debate.debate_id)">{{ debate.debate_name }}</a></h1>
       </div>
     </div>
     <div class="row">
