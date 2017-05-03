@@ -1,10 +1,10 @@
 <div class="col-md-6 col-md-offset-3">
-	<div *ngIf="loading" class="well">
+	<div *ngIf="loading" class="alert alert-info">
 		Loading...<i class="fa fa-spinner fa-spin"></i>
 	</div>
 	<div *ngIf="confirmed">
 		<div class="alert alert-success">You are now ready to access b33f.io</div>
-		<button (click)="login()" class="btn btn-primary btn-block">Go to Login</button>
+		<button (click)="goHome()" class="btn btn-primary btn-block">Return to Home</button>
 	</div>
 	<div *ngIf="rejected" class="alert alert-danger">Unable to confirm signup</div>
 </div>

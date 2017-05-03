@@ -16,6 +16,7 @@ export class MyDebatesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.beefApiService.setTitle("My Debates");
         this.beefApiService.getMyDebates().then((res) => {
             try{
                 res.json();

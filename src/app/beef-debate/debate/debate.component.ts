@@ -29,6 +29,7 @@ export class DebateComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.beefApi.setTitle("Debate");
         this.route.params.subscribe(
             x => this.beefApi.getDebateById(x['id'])
             .then(x => { this.updateModel(x) }));
@@ -40,6 +41,7 @@ export class DebateComponent implements OnInit {
     }
 
     updateModel(x) {
+        this.beefApi.setTitle(x['debate'].debate_name);
         this.debate = x['debate'];
         this.points = x['points'];
         this.generateRows();

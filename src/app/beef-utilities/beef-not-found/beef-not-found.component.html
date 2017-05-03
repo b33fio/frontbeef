@@ -1,6 +1,4 @@
-<h1>
-  Error. Page Not Found
-</h1>
-<p>
-  Insert link To previous page/Home page??
-</p>
+<div class="col-md-6 col-md-offset-3">
+	<div *ngIf="rejected" class="alert alert-danger">Your Beef was not found</div>
+  <button (click)="goHome()" class="btn btn-primary btn-block">Return to Home</button>
+</div>

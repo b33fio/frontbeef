@@ -17,6 +17,7 @@ export class VerifyComponent implements OnInit {
   rejected;
   loading;
   ngOnInit() {
+    this.beefApi.setTitle("Confirming Account");
     this.loading=true;
     this.route.params.subscribe((x) => {
       this.token = x['token'];
@@ -34,7 +35,7 @@ export class VerifyComponent implements OnInit {
     }); 
   }
 
-  login(){
+  goHome(){
     this.router.navigate([""]);
   }
 

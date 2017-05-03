@@ -25,6 +25,7 @@ export class CreateDebateComponent implements OnInit {
 
 
     ngOnInit() {
+        this.beefApi.setTitle("Create Debate");
         this.beefApi.getChannels().then(x => {
             this.channels = x.json()['channels'];
         });

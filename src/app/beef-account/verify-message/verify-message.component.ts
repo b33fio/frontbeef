@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BeefApiService } from '../../beef-api/beef-api.service';
 
 @Component({
   selector: 'app-verify-message',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyMessageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private beefApi : BeefApiService) { }
 
   ngOnInit() {
+    this.beefApi.setTitle("Verify Your Account");
   }
 
 }
