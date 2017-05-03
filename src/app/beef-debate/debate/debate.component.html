@@ -2,15 +2,26 @@
     <h1 id="debateTitle">{{ this.debate.debate_name }}
         <small>({{this.debate.channel_name}})</small>
     </h1>
-    <div class="buttons-container pull-right">
-        <share-buttons></share-buttons>
-    </div>
 
-    <button *ngIf="this.showJoinButton"
-        class="btn btn-primary"
-        (click)="joinDebate()">
-        Join debate
-    </button>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="join-button-container">
+                 <button *ngIf="this.showJoinButton"
+                    class="btn btn-primary"
+                    (click)="joinDebate()">
+                    Join debate
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="buttons-container">
+                <share-buttons></share-buttons>
+            </div>
+        </div>
+
+
+    </div>
 
     <div class="row">
         <div class="col-md-6">
