@@ -28,6 +28,8 @@ export class MyDebatesComponent implements OnInit {
             } else {
                 this.message = 'Server responded with: "Unable to Fetch Your Debates';
             }
+
+            console.log(this.debates);
         });
     }
     goToDebate(id){

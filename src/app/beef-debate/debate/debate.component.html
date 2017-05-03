@@ -1,10 +1,27 @@
 <div *ngIf="debate" class="container">
-    <h1>{{ this.debate.debate_name }} <small>({{this.debate.channel_name}})</small></h1>
-    <button *ngIf="this.showJoinButton"
-        class="btn btn-primary"
-        (click)="joinDebate()">
-        Join debate
-    </button>
+    <h1 id="debateTitle">{{ this.debate.debate_name }}
+        <small>({{this.debate.channel_name}})</small>
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="join-button-container">
+                 <button *ngIf="this.showJoinButton"
+                    class="btn btn-primary"
+                    (click)="joinDebate()">
+                    Join debate
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="buttons-container">
+                <share-buttons></share-buttons>
+            </div>
+        </div>
+
+
+    </div>
 
     <div class="row">
         <div class="col-md-6">
@@ -54,7 +71,8 @@
     </div>
 
     <div *ngIf="this.showPostForm" class="row">
-        <div class="col-md-3"></div>
+        <div *ngIf="this.beefApi.getUser().username == this.debate.opponent_username"
+             class="col-md-6"></div>
         <div class="col-md-6">
             <div class="input-group">
                 <label for="pointTextForm">New Point:</label>
@@ -63,7 +81,9 @@
             </div>
             <button (click)="this.submitPoint()" type="submit" class="btn btn-default">Submit</button>
         </div>
-        <div class="col-md-3"></div>
+        <div *ngIf="this.beefApi.getUser().username == this.debate.proponent_username"
+             class="col-md-6"></div>
+
     </div>
 
 </div>

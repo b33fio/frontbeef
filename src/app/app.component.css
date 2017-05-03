@@ -21,3 +21,7 @@ a {
   text-align: center;
   padding-top:15px;
 }
+
+body {
+    margin-bottom: 100px;
+}

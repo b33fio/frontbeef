@@ -16,3 +16,11 @@
 .timestamp{
     color: grey;
 }
+
+.buttons-container {
+    margin-top: 7px;
+}
+
+.join-button-container {
+    margin-top:26px;
+}
