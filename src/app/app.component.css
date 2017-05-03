@@ -7,3 +7,12 @@ a {
 .outlet{
   padding-top: 50px;
 }
+
+.navbar-brand {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 32px;
+}
+.navbar{
+  background-color: #f49d9d;
+  border:0px;
+}
