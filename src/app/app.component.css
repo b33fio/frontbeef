@@ -16,3 +16,8 @@ a {
   background-color: #f49d9d;
   border:0px;
 }
+
+.center-text{
+  text-align: center;
+  padding-top:15px;
+}

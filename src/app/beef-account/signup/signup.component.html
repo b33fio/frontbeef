@@ -1,4 +1,4 @@
-<h3>New User</h3>
+<h3>New User? Signup</h3>
 <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Name</span>
@@ -6,7 +6,7 @@
   </div>
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Email</span>
-    <input type="text" class="form-control" placeholder="Email (for verification purposes)" aria-describedby="sizing-addon2" id="email" required [(ngModel)]="model.email" name="email">
+    <input type="text" class="form-control" placeholder="Email (for verification purposes)" aria-describedby="sizing-addon2" id="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" [(ngModel)]="model.email" name="email">
   </div>
   <div class="input-group margin">
     <span class="input-group-addon" id="sizing-addon2">Username</span>

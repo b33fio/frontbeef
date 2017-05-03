@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         res.json();
       } catch (e){
         this.submitted = false; 
-        this.message = "Server Error, Try again!";
+        this.message = "Server Responded with: Invalid Username or Password";
         return;
       }
       if(res.status===200 && res.json().successful){
