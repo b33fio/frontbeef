@@ -16,3 +16,11 @@
 .timestamp{
     color: grey;
 }
+
+.buttons-container {
+    margin-top: 7px;
+}
+
+#debateTitle {
+    display: inline-block;
+}
