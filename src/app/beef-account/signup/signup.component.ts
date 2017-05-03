@@ -18,7 +18,8 @@ export class SignupComponent implements OnInit {
   submitted = false;
   onSubmit() { 
     if(this.model.password != this.model.confirm_password){
-      this.message = "Service Unavailable at this time";
+      this.message = "Passowrds do not match";
+      return;
     }
     this.submitted = true; 
     let req = {
