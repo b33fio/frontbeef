@@ -1,6 +1,6 @@
 <div *ngIf="debate" class="container">
     <h1>{{ this.debate.debate_name }} </h1>
-    <button *ngIf="!this.debate.opponent_id"
+    <button *ngIf="this.showJoinButton"
         class="btn btn-primary"
         (click)="joinDebate()">
         Join debate
