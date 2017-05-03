@@ -17,6 +17,9 @@ export class SignupComponent implements OnInit {
   model:any = new User();
   submitted = false;
   onSubmit() { 
+    if(this.model.password != this.model.confirm_password){
+      this.message = "Service Unavailable at this time";
+    }
     this.submitted = true; 
     let req = {
       first_name: this.model.name,

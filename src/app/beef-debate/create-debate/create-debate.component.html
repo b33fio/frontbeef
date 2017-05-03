@@ -4,7 +4,7 @@
         <div *ngIf="this.loggedIn">
             <form (ngSubmit)="onSubmit()" #debateForm="ngForm">
                 <div class="form-group">
-                    <label for="channel-select">Channel</label>
+                    <label for="channel-select" class="bungee">Channel</label>
                     <select id="channel-select"
                             name="channel-select"
                             class="form-control"
@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label for="debate-title">Title</label>
+                    <label for="debate-title" class="bungee">Title</label>
                     <input type="text" id="debate-title"
                               name="debate-title"
                               class="form-control"

@@ -1,5 +1,5 @@
 <div *ngIf="debate" class="container">
-    <h1 id="debateTitle">{{ this.debate.debate_name }}
+    <h1 id="debateTitle" class="bungee">{{ this.debate.debate_name }}
         <small>({{this.debate.channel_name}})</small>
     </h1>
 
@@ -25,11 +25,11 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h3> {{ this.debate.proponent_username }} </h3>
+            <h3 class="bungee"> {{ this.debate.proponent_username }} </h3>
         </div>
 
         <div class="col-md-6">
-            <h3> {{ this.debate.opponent_username || "Waiting for Opponent"}} </h3>
+            <h3 class="bungee"> {{ this.debate.opponent_username || "Waiting for Opponent"}} </h3>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
             <div class="point_container"
                  [ngClass]="{'point_shifted': row.pointShifted == 'left'}"
                 *ngIf="row.leftPoint">
-                <p>{{ row.leftPoint.point_type || '' }}</p>
+                <p class="bungee">{{ row.leftPoint.point_type || '' }}</p>
                 <div class="well">
                     <span> {{ row.leftPoint.point_text }}</span>
                     <br>
@@ -60,7 +60,7 @@
                  [ngClass]="{'point_shifted': row.pointShifted == 'right'}"
                 *ngIf="row.rightPoint">
 
-                <p>{{ row.rightPoint.point_type || '' }}</p>
+                <p class="bungee">{{ row.rightPoint.point_type || '' }}</p>
                 <div class="well">
                     <span> {{ row.rightPoint.point_text }} </span>
                     <br>
@@ -75,11 +75,11 @@
              class="col-md-6"></div>
         <div class="col-md-6">
             <div class="input-group">
-                <label for="pointTextForm">New Point:</label>
+                <label for="pointTextForm" class="bungee">New Point:</label>
                 <input type="text" id="pointTextForm" class="form-control"
                                                       rows="3" [(ngModel)]="pointText" />
             </div>
-            <button (click)="this.submitPoint()" type="submit" class="btn btn-default">Submit</button>
+            <button (click)="this.submitPoint()" type="submit" class="btn btn-default bungee">Submit</button>
         </div>
         <div *ngIf="this.beefApi.getUser().username == this.debate.proponent_username"
              class="col-md-6"></div>
