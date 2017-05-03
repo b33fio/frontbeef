@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
   message;
-  model = new User();
+  model:any = new User();
   submitted = false;
   onSubmit() { 
     this.submitted = true; 
@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit {
       username: this.model.username,
       user_type: "user",
       password: this.model.password,
-      password_check: this.model.password,
       email: this.model.email,
       phone_number: 12345
     };
