@@ -32,7 +32,7 @@ export class DebateComponent implements OnInit {
         this.route.params.subscribe(
             x => this.beefApi.getDebateById(x['id'])
             .then(x => { this.updateModel(x) }));
-        this.refreshId = this.listenForNewPoints(3000);
+        //this.refreshId = this.listenForNewPoints(3000);
     }
 
     ngOnDestroy() {
@@ -142,14 +142,14 @@ export class DebateComponent implements OnInit {
                 rows.push({
                     "leftPoint": null,
                     "rightPoint": {"point_text": "Pending..."},
-                    "pointShifted": null
+                    "pointShifted": pointShifted
                 });
                 this.nextPoster = this.debate['opponent_username'];
             } else {
                 rows.push({
                     "leftPoint": {"point_text": "Pending..."},
                     "rightPoint": null,
-                    "pointShifted": null
+                    "pointShifted": pointShifted
                 });
                 this.nextPoster = this.debate['proponent_username'];
             }
