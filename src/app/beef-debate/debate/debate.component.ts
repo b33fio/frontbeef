@@ -73,7 +73,7 @@ export class DebateComponent implements OnInit {
         this.beefApi.postPoint(this.debate['debate_id'], this.pointText)
             .then(x => {
                 this.beefApi.getDebateById(this.debate['debate_id'])
-                    .then(x => { this.updateModel(x); });
+                    .then(x => { this.updateModel(x); this.pointText = "";});
             });
     }
 
